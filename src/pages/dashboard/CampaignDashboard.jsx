@@ -100,8 +100,6 @@ const CampaignDashboard = () => {
       shared: true
     }
   };
-alert(innerHeight)
-alert(innerWidth)
   // Campaign Type Breakdown Chart options
   const campaignTypeChartOptions = {
     chart: {
@@ -225,7 +223,7 @@ alert(innerWidth)
         <div className="p-3">
 
           <div id="dashboard-controls" className="lg:flex justify-between items-center mb-6 lg:space-y-0 space-y-3">
-            <div className="flex justify-between items-center space-x-3">
+            <div className="md:flex justify-between items-center md:space-x-3 space-y-2 md:space-y-0">
               <div className="relative">
                 <div className="border border-gray-300 rounded-md px-4 py-2 flex items-center bg-white">
                   <CalendarToday className="mr-2 text-gray-500" style={{ fontSize: '1rem' }} />
@@ -240,12 +238,12 @@ alert(innerWidth)
                 </div>
               </div>
             </div>
-            <div id="quick-actions" className="flex justify-between space-x-2">
-              <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
+            <div id="quick-actions" className="md:flex justify-between space-x-2 space-y-3 md:space-y-0">
+              <button className="bg-indigo-600 text-white w-full px-4 py-2 rounded-md text-sm font-medium flex items-center">
                 <Add className="mr-2" style={{ fontSize: '1rem' }} />
                 Create Campaign
               </button>
-              <div className='flex gap-3'>
+              <div className='flex justify-between'>
                 <button className="border border-gray-300 bg-white text-gray-700 px-4 py-2 rounded-md text-sm font-medium flex items-center">
                   <Download className="mr-2" style={{ fontSize: '1rem' }} />
                   Export Report
@@ -339,7 +337,7 @@ alert(innerWidth)
           </div>
    
           {/* Campaign Performance Chart */}
-          <div id="performance-chart" className="w-full bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+          {/* <div id="performance-chart" className="w-full bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign Performance</h3>
               <div className="flex items-center space-x-3">
@@ -367,7 +365,7 @@ alert(innerWidth)
               options={campaignChartOptions}
               containerProps={{ style: { height: '300px' } }}
             />
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             {/* Campaign Type Breakdown */}
@@ -501,7 +499,7 @@ alert(innerWidth)
           </div>
 
           {/* Geo Heatmap of Campaign Response */}
-          <div id="geo-heatmap" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+          {/* <div id="geo-heatmap" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Geo Distribution of Campaign Responses</h3>
               <div className="flex items-center space-x-3">
@@ -571,7 +569,7 @@ alert(innerWidth)
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Channel-wise Campaign Summary */}
           <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
@@ -688,7 +686,7 @@ alert(innerWidth)
           </div>
 
           {/* Campaign List & Stats */}
-          <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+          {/* <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign List</h3>
               <div className="flex items-center space-x-3">
@@ -781,7 +779,7 @@ alert(innerWidth)
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">Next</button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

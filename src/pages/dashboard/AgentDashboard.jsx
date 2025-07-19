@@ -233,7 +233,7 @@ const AgentDashboard = () => {
           </div>
           <div className="flex justify-between items-center space-x-3">
             <div className="relative">
-              <select className="bg-gray-50 border border-gray-300 text-gray-700 px-3 py-2 pr-8 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+              <select className="bg-gray-50 border border-gray-300 text-gray-700 md:px-3 py-2 pr-8 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                 <option>Today</option>
                 <option>This Week</option>
                 <option>This Month</option>
@@ -241,13 +241,13 @@ const AgentDashboard = () => {
               </select>
             </div>
             <div className='flex gap-3'>
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 roun h-10 ded-md flex items-center">
+              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 md:px-4 px-1 rounded-md h-10 ded-md flex items-center">
                 <DownloadIcon className="mr-2" />
                 Export
               </button>
-              <button className="bg-primary-600 hover:bg-primary-700 h-10 text-white px-4 py-2 rounded-md flex items-center">
+              <button className="bg-primary-600 hover:bg-primary-700 h-10 text-white md:px-4 px-1 py-2 rounded-md flex items-center">
                 <AddIcon className="mr-2" />
-                Add Agent
+                Add
               </button>
             </div>
           </div>
@@ -612,94 +612,6 @@ const AgentDashboard = () => {
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button className="text-sm text-primary-600 hover:text-primary-900">View All Agents <ArrowForwardIcon className="ml-1 text-xs" /></button>
-          </div>
-        </div> */}
-        {/* <div id="agent-leaderboard" className="bg-white rounded-lg shadow-sm mb-6 overflow-hidden">
-          <div className="p-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-800">Agent Leaderboard</h2>
-          </div>
-
-          <div className="overflow-x-auto">
-            <div className="min-w-full inline-block align-middle">
-              <div className="overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Agent
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Total Leads <SortIcon className="ml-1 text-xs" />
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Conversion % <SortIcon className="ml-1 text-xs" />
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Avg. Response <SortIcon className="ml-1 text-xs" />
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Current Load <SortIcon className="ml-1 text-xs" />
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Status
-                      </th>
-                      <th scope="col" className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {agents.map((agent) => (
-                      <tr key={agent.id}>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className={`h-10 w-10 rounded-full ${agent.color} flex items-center justify-center text-white font-medium`}>
-                              {agent.initials}
-                            </div>
-                            <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">{agent.name}</div>
-                              <div className="text-sm text-gray-500">{agent.team}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {agent.leads}
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-semibold text-gray-900">{agent.conversion}</div>
-                          <div className={`text-xs ${agent.conversionColor}`}>{agent.conversionDiff}</div>
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {agent.response}
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                              <div className={`h-2.5 ${agent.loadColor} rounded-full`} style={{ width: agent.loadPercentage }}></div>
-                            </div>
-                            <span className="text-sm text-gray-900">{agent.load}</span>
-                          </div>
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${agent.statusColor}`}>
-                            {agent.status}
-                          </span>
-                        </td>
-                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button className="text-primary-600 hover:text-primary-900">View Details</button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-4 sm:px-6 py-3 bg-gray-50 text-right">
-            <button className="text-sm text-primary-600 hover:text-primary-900">
-              View All Agents <ArrowForwardIcon className="ml-1 text-xs" />
-            </button>
           </div>
         </div> */}
 

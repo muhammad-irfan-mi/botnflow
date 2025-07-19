@@ -16,7 +16,7 @@ const LeadGenerationDashboard = () => {
       {/* <main className="pt-16 pb-6"> */}
         <div className="max-w-7xl mx-auto px-3">
           {/* Date & Filter Controls */}
-          <div className="flex justify-between items-center mb-6">
+          <div className="md:flex justify-between items-center mb-6">
             <h1 className="md:text-2xl md:font-bold font-semibold text-gray-800">Lead Generation Dashboard</h1>
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -27,15 +27,12 @@ const LeadGenerationDashboard = () => {
                   <option>Last 30 days</option>
                   <option>Custom Range</option>
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                  {/* <KeyboardArrowDown className="text-xs" /> */}
-                </div>
               </div>
-              <button className="w-26 bg-white border border-gray-300 rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              <button className="w-26 bg-white border border-gray-300 rounded-md md:px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                 <FilterAlt className="mr-1" fontSize="small" />
                 Filters
               </button>
-              <button className="w-26 bg-blue-600 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <button className="w-26 bg-blue-600 text-white rounded-md md:px-4 py-2 text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <Download className="mr-1" fontSize="small" />
                 Export
               </button>
@@ -446,7 +443,7 @@ const LeadGenerationDashboard = () => {
               </div>
               
               {/* Follow-ups & Reminders */}
-              <div className="bg-white rounded-lg shadow">
+              {/* <div className="bg-white rounded-lg shadow">
                 <div className="px-5 py-4 border-b border-gray-200">
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg font-medium text-gray-800">Follow-ups & Reminders</h2>
@@ -517,14 +514,14 @@ const LeadGenerationDashboard = () => {
                 <div className="px-5 py-3 border-t border-gray-200 text-center">
                   <span className="text-sm font-medium text-blue-600 hover:text-blue-700 cursor-pointer">View all follow-ups</span>
                 </div>
-              </div>
+              </div> */}
               
               {/* Quick Actions Panel */}
               <div className="bg-white rounded-lg shadow">
                 <div className="px-5 py-4 border-b border-gray-200">
                   <h2 className="text-lg font-medium text-gray-800">Quick Actions</h2>
                 </div>
-                <div className="p-5 grid grid-cols-3 gap-3">
+                <div className="p-5 grid grid-cols-2 lg:grid-cols-3 gap-3">
                   <button className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-gray-100 rounded-md">
                     <Add className="text-blue-600 text-lg" />
                     <span className="mt-1 text-xs font-medium text-gray-700">Add Lead</span>

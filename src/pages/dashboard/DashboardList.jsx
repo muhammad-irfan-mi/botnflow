@@ -11,7 +11,7 @@ function DashboardList() {
         <div className='mt-16 bg-gray-50'>
             <div className="bg-white border-b sticky top-16 z-10">
                 <div className="max-w-7xl mx-auto">
-                    <nav className="flex -mb-px">
+                    <nav className="md:flex  -mb-px">
                         <span
                             className={`border-b-2 whitespace-nowrap py-4 px-5 font-medium text-sm flex items-center cursor-pointer 
             ${dashboard === 'leadgenerationdashboard'
