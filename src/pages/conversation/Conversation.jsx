@@ -118,144 +118,145 @@ const Conversations = () => {
     };
 
     return (
-        <div className="flex h-screen mt-16 overflow-hidden font-sans">
+        <div className="lg:flex mt-16 overflow-hidden font-sans">
             {/* Left Panel */}
-            <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
-                <div className="border-b border-gray-200 p-4">
-                    <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-                        <button
-                            onClick={() => setActive("whatsapp")}
-                            className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "whatsapp"
-                                ? "bg-white text-blue-600 shadow-sm"
-                                : "text-gray-600 hover:text-gray-900"
-                                }`}
-                        >
-                            <WhatsAppIcon fontSize="small" className="mr-1" /> WhatsApp
-                        </button>
+            <div className="flex">
+                <div className="w-80 hidden bg-white border-r border-gray-200 md:flex flex-col">
+                    <div className="border-b border-gray-200 p-4">
+                        <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
+                            <button
+                                onClick={() => setActive("whatsapp")}
+                                className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "whatsapp"
+                                    ? "bg-white text-blue-600 shadow-sm"
+                                    : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                <WhatsAppIcon fontSize="small" className="mr-1" /> WhatsApp
+                            </button>
 
-                        <button
-                            onClick={() => setActive("sms")}
-                            className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "sms"
-                                ? "bg-white text-blue-600 shadow-sm"
-                                : "text-gray-600 hover:text-gray-900"
-                                }`}
-                        >
-                            <SmsIcon fontSize="small" className="mr-1" /> SMS
-                        </button>
+                            <button
+                                onClick={() => setActive("sms")}
+                                className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "sms"
+                                    ? "bg-white text-blue-600 shadow-sm"
+                                    : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                <SmsIcon fontSize="small" className="mr-1" /> SMS
+                            </button>
 
-                        <button
-                            onClick={() => setActive("voice")}
-                            className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "voice"
-                                ? "bg-white text-blue-600 shadow-sm"
-                                : "text-gray-600 hover:text-gray-900"
-                                }`}
-                        >
-                            <PhoneIcon fontSize="small" className="mr-1" /> Voice
-                        </button>
-                    </div>
-                </div>
-
-                <div className="p-4 border-b border-gray-200">
-                    <div className="relative">
-                        <TextField
-                            placeholder="Search contacts..."
-                            size="small"
-                            fullWidth
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon className="text-gray-400" />
-                                    </InputAdornment>
-                                ),
-                                className: "rounded-lg bg-white",
-                            }}
-                        />
-                    </div>
-                </div>
-
-                <div className="flex-1 overflow-y-auto">
-                    <div
-                        className="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer bg-blue-50"
-                        onClick={() => setSelectedContact("john")}
-                    >
-                        <div className="flex items-center space-x-3">
-                            <Avatar src={contact.avatar} alt={contact.name} className="w-10 h-10" />
-                            <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between">
-                                    <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
-                                    <span className="text-xs text-gray-500">2:30 PM</span>
-                                </div>
-                                <p className="text-sm text-gray-500 truncate">Thanks for the quick response!</p>
-                            </div>
-                            <WhatsAppIcon className="text-green-500" fontSize="small" />
+                            <button
+                                onClick={() => setActive("voice")}
+                                className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "voice"
+                                    ? "bg-white text-blue-600 shadow-sm"
+                                    : "text-gray-600 hover:text-gray-900"
+                                    }`}
+                            >
+                                <PhoneIcon fontSize="small" className="mr-1" /> Voice
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            {/* Middle Panel */}
-            <div className="flex-1 flex flex-col bg-gray-50">
-                <div className="bg-white border-b border-gray-200 p-4">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                            <Avatar src={contact.avatar} className="w-10 h-10" />
-                            <div>
-                                <h3 className="text-lg font-medium text-gray-900">{contact.name}</h3>
-                                <p className="text-sm text-gray-500">{contact.phone}</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <IconButton><PhoneIcon className="text-gray-600" /></IconButton>
-                            <IconButton><VideoCallIcon className="text-gray-600" /></IconButton>
-                            <IconButton><MoreVertIcon className="text-gray-600" /></IconButton>
+                    <div className="p-4 border-b border-gray-200">
+                        <div className="relative">
+                            <TextField
+                                placeholder="Search contacts..."
+                                size="small"
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon className="text-gray-400" />
+                                        </InputAdornment>
+                                    ),
+                                    className: "rounded-lg bg-white",
+                                }}
+                            />
                         </div>
                     </div>
-                </div>
 
-                <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                    {contact.messages.map((msg, i) => (
+                    <div className="flex-1 overflow-y-auto">
                         <div
-                            key={i}
-                            className={msg.type === "sent" ? "flex justify-end" : "flex justify-start"}
+                            className="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer bg-blue-50"
+                            onClick={() => setSelectedContact("john")}
                         >
-                            <div className="max-w-xs lg:max-w-md">
-                                <div
-                                    className={`rounded-lg p-3 shadow-sm ${msg.type === "sent" ? "bg-blue-600 text-white" : "bg-white text-gray-900"
-                                        }`}
-                                >
-                                    <p className="text-sm">{msg.text}</p>
+                            <div className="flex items-center space-x-3">
+                                <Avatar src={contact.avatar} alt={contact.name} className="w-10 h-10" />
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center justify-between">
+                                        <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
+                                        <span className="text-xs text-gray-500">2:30 PM</span>
+                                    </div>
+                                    <p className="text-sm text-gray-500 truncate">Thanks for the quick response!</p>
                                 </div>
-                                <div
-                                    className={`text-xs text-gray-500 mt-1 ${msg.type === "sent" ? "text-right flex items-center justify-end gap-1" : ""
-                                        }`}
-                                >
-                                    {msg.time} {msg.type === "sent" && <DoneAllIcon fontSize="inherit" className="text-blue-400" />}
-                                </div>
+                                <WhatsAppIcon className="text-green-500" fontSize="small" />
                             </div>
                         </div>
-                    ))}
+                    </div>
                 </div>
 
-                <div className="bg-white border-t border-gray-200 p-4">
-                    <div className="flex items-center space-x-3">
-                        {/* <IconButton><AttachmentIcon className="text-gray-600" /></IconButton> */}
-                        <TextField
-                            placeholder="Type a message..."
-                            size="small"
-                            fullWidth
-                            InputProps={{
-                                className: "rounded-lg",
-                            }}
-                        />
-                        <IconButton className="bg-blue-600 hover:bg-blue-700 text-white">
-                            <SendIcon />
-                        </IconButton>
+                {/* Middle Panel */}
+                <div className="flex-1 flex flex-col bg-gray-50">
+                    <div className="bg-white border-b border-gray-200 p-4">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                                <Avatar src={contact.avatar} className="w-10 h-10" />
+                                <div>
+                                    <h3 className="text-lg font-medium text-gray-900">{contact.name}</h3>
+                                    <p className="text-sm text-gray-500">{contact.phone}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <IconButton><PhoneIcon className="text-gray-600" /></IconButton>
+                                <IconButton><VideoCallIcon className="text-gray-600" /></IconButton>
+                                <IconButton><MoreVertIcon className="text-gray-600" /></IconButton>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                        {contact.messages.map((msg, i) => (
+                            <div
+                                key={i}
+                                className={msg.type === "sent" ? "flex justify-end" : "flex justify-start"}
+                            >
+                                <div className="max-w-xs lg:max-w-md">
+                                    <div
+                                        className={`rounded-lg p-3 shadow-sm ${msg.type === "sent" ? "bg-blue-600 text-white" : "bg-white text-gray-900"
+                                            }`}
+                                    >
+                                        <p className="text-sm">{msg.text}</p>
+                                    </div>
+                                    <div
+                                        className={`text-xs text-gray-500 mt-1 ${msg.type === "sent" ? "text-right flex items-center justify-end gap-1" : ""
+                                            }`}
+                                    >
+                                        {msg.time} {msg.type === "sent" && <DoneAllIcon fontSize="inherit" className="text-blue-400" />}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bg-white border-t border-gray-200 p-4">
+                        <div className="flex items-center space-x-3">
+                            {/* <IconButton><AttachmentIcon className="text-gray-600" /></IconButton> */}
+                            <TextField
+                                placeholder="Type a message..."
+                                size="small"
+                                fullWidth
+                                InputProps={{
+                                    className: "rounded-lg",
+                                }}
+                            />
+                            <IconButton className="bg-blue-600 hover:bg-blue-700 text-white">
+                                <SendIcon />
+                            </IconButton>
+                        </div>
                     </div>
                 </div>
             </div>
-
             {/* Right Panel */}
-            <div className="w-80 bg-white border-l border-gray-200 flex flex-col">
+            <div className="w-80 hidden bg-white border-l border-gray-200 lg:flex flex-col">
                 <div className="p-6 border-b border-gray-200 text-center">
                     <Avatar src={contact.avatar} className="w-20 h-20 mx-auto mb-4" />
                     <h3 className="text-lg font-medium text-gray-900">{contact.name}</h3>

@@ -133,34 +133,34 @@ const Settings = () => {
 
                     {/* Tabs Navigation */}
                     <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
-                        <div className="flex overflow-x-auto hide-scrollbar">
+                        <div className="md:flex overflow-x-auto hide-scrollbar">
                             <button
                                 onClick={() => setCurrentTab('general')}
-                                className={`py-3 px-4 border-b-2 ${currentTab === 'general' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
+                                className={`block md:py-3 md:px-4 p-1 border-b-2 ${currentTab === 'general' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
                             >
                                 General
                             </button>
                             <button
                                 onClick={() => setCurrentTab('channels')}
-                                className={`py-3 px-4 border-b-2 ${currentTab === 'channels' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
+                                className={`block md:py-3 md:px-4 p-1 border-b-2 ${currentTab === 'channels' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
                             >
                                 Channels
                             </button>
                             <button
                                 onClick={() => setCurrentTab('integrations')}
-                                className={`py-3 px-4 border-b-2 ${currentTab === 'integrations' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
+                                className={`block md:py-3 md:px-4 p-1 border-b-2 ${currentTab === 'integrations' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
                             >
                                 Integrations
                             </button>
                             <button
                                 onClick={() => setCurrentTab('user-management')}
-                                className={`py-3 px-4 border-b-2 ${currentTab === 'user-management' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
+                                className={`block md:py-3 md:px-4 p-1 border-b-2 ${currentTab === 'user-management' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
                             >
                                 User Management
                             </button>
                             <button
                                 onClick={() => setCurrentTab('billing')}
-                                className={`py-3 px-4 border-b-2 ${currentTab === 'billing' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
+                                className={`block md:py-3 md:px-4 p-1 border-b-2 ${currentTab === 'billing' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'} font-medium text-sm whitespace-nowrap`}
                             >
                                 Billing
                             </button>
@@ -746,7 +746,7 @@ const Settings = () => {
                                     </div>
 
                                     {/* Users Table */}
-                                    <div className="overflow-x-auto">
+                                    <div className="overflow-x-auto w-[245px] md:w-[740px] lg:w-auto">
                                         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                             <thead className="bg-gray-50 dark:bg-gray-700">
                                                 <tr>
@@ -768,7 +768,6 @@ const Settings = () => {
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                                {/* User 1 */}
                                                 <tr>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <div className="flex items-center">
@@ -800,7 +799,6 @@ const Settings = () => {
                                                     </td>
                                                 </tr>
 
-                                                {/* User 2 */}
                                                 <tr>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <div className="flex items-center">
@@ -832,7 +830,6 @@ const Settings = () => {
                                                     </td>
                                                 </tr>
 
-                                                {/* User 3 */}
                                                 <tr>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <div className="flex items-center">
@@ -877,12 +874,12 @@ const Settings = () => {
                             {/* Billing Overview */}
                             <div className="bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
                                 <div className="p-6">
-                                    <div className="flex justify-between items-center mb-6">
+                                    <div className="md:flex justify-between items-center mb-6">
                                         <div>
                                             <h2 className="text-lg font-medium text-gray-800 dark:text-white">Billing & Usage</h2>
                                             <p className="text-gray-600 dark:text-gray-300">Manage your subscription and billing information</p>
                                         </div>
-                                        <div className="flex items-center space-x-3">
+                                        <div className="flex items-center space-x-3 mt-3 md:mt-0">
                                             <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900 dark:text-green-200">
                                                 Pro Plan
                                             </span>

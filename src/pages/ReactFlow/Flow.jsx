@@ -386,11 +386,11 @@ const Flow = () => {
         </section>
 
         {/* Pagination */}
-        <section className="flex justify-between items-center">
+        <section className="md:flex justify-between items-center">
           <div className="text-sm text-gray-600">
             Showing 1-6 of 24 flows
           </div>
-          <div className="flex">
+          <div className="flex mt-3 md:mt-0">
             <button className="border border-gray-300 rounded-l-md px-3 py-1 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
               <ChevronLeft fontSize="small" />
             </button>

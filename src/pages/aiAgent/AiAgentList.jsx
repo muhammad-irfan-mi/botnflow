@@ -208,38 +208,11 @@ const AiAgentList = () => {
 
     return (
         <div className="bg-gray-50 mt-16 font-sans">
-            {/* Header */}
-            {/* <header className="bg-white border-b border-gray-200 sticky top-0 z-10"> */}
-
-            {/* <div className="relative">
-              <button className="text-gray-500 hover:text-gray-700">
-                <NotificationsIcon />
-              </button>
-            </div> */}
-            {/* <div className="relative">
-              <button 
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setShowKeyboardShortcuts(true)}
-              >
-                <HelpOutlineIcon />
-              </button>
-            </div> */}
-            {/* <div className="flex items-center">
-              <img 
-                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" 
-                alt="User Avatar" 
-                className="w-8 h-8 rounded-full border border-gray-200"
-              />
-            </div> */}
-            {/* </header> */}
-
+          
             {/* Main Content */}
             <div className="container mx-auto p-3">
                 <div className="flex justify-between items-center mb-3">
                     <div className="flex items-center">
-                        {/* <div className="text-2xl font-bold  text-primary-600">
-                            <span className="text-2xl">🤖</span>
-                        </div> */}
                         <h1 className="text-xl font-semibold text-gray-800">AI Agents</h1>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -256,7 +229,7 @@ const AiAgentList = () => {
                 </div>
                 {/* Search & Filters */}
                 <div className="mb-6">
-                    <div className="flex justify-between items-center gap-4">
+                    <div className="lg:flex justify-between items-center gap-4">
                         <div className="relative flex-grow">
                             <SearchIcon className="absolute left-3 top-3 text-gray-400" />
                             <input
@@ -265,8 +238,7 @@ const AiAgentList = () => {
                                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
                             />
                         </div>
-                        <div className="flex flex-wrap gap-3">
-                            <div className="relative">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3">
                                 <select
                                     className='bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm'
                                 >
@@ -275,30 +247,23 @@ const AiAgentList = () => {
                                     <option value="ur">Urdu</option>
                                     <option value="ar">Arabic</option>
                                 </select>
-                            </div>
-                            <div className="relative">
                                 <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
                                     <option value="">Status: All</option>
                                     <option value="ready">Ready</option>
                                     <option value="training">Training</option>
                                     <option value="archived">Archived</option>
                                 </select>
-                            </div>
-                            <div className="relative">
                                 <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
                                     <option value="">Domain: All</option>
                                     <option value="support">Support</option>
                                     <option value="sales">Sales</option>
                                     <option value="faq">FAQ Bot</option>
                                 </select>
-                            </div>
-                            <div className="relative">
                                 <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
                                     <option value="">Created By: All</option>
                                     <option value="me">Me</option>
                                     <option value="team">Team</option>
                                 </select>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -305,7 +305,7 @@ const AIAgent = () => {
 
       {/* Main Content */}
       <main className=" mt-16 p-3">
-        <div className="flex justify-between items-center mb-6">
+        <div className="md:flex justify-between items-center mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">AI Agent Management</h1>
             <p className="text-gray-600">Build and manage conversational AI intents</p>
@@ -320,9 +320,9 @@ const AIAgent = () => {
           </div>
         </div>
 
-        <div className="flex space-x-6 ">
+        <div className="lg:flex lg:space-x-6 ">
           {/* Left Panel: Intent Library */}
-          <div className="w-1/3 h-[1%] bg-white rounded-lg border border-gray-200 flex flex-col">
+          <div className="flex-1 h-[1%] bg-white rounded-lg border border-gray-200 flex flex-col">
             <div className="p-4 border-b border-gray-200">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold text-gray-900">Intent Library</h2>
@@ -377,7 +377,7 @@ const AIAgent = () => {
           </div>
 
           {/* Right Panel: Intent Configuration */}
-          <div className={`flex-1 h-[1%] bg-white  rounded-lg border border-gray-200 ${!selectedIntent ? 'hidden' : ''}`}>
+          <div className={`flex-2 h-[1%] bg-white mt-3 lg:mt-0 rounded-lg border border-gray-200 ${!selectedIntent ? 'hidden' : ''}`}>
             <div className="p-4 border-b border-gray-200">
               <div className="flex justify-between items-center">
                 <h2 className="text-lg font-semibold text-gray-900">{selectedIntent?.name || 'Select an Intent'}</h2>
@@ -623,7 +623,7 @@ const AIAgent = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Dark overlay with opacity - separate from modal content */}
           <div
-            className="fixed inset-0 bg-black opacity-70"
+            className="fixed inset-0 bg-gray-100 opacity-70"
             onClick={() => setShowCreateIntent(false)}
           ></div>
 
@@ -716,7 +716,7 @@ const AIAgent = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Dark overlay with proper opacity */}
           <div
-            className="fixed inset-0 bg-black opacity-70"
+            className="fixed inset-0 bg-gray-100 opacity-70"
             onClick={() => setShowAddEntity(false)}
           ></div>
 
@@ -798,7 +798,7 @@ const AIAgent = () => {
       {showAddAction && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
-            className="fixed inset-0 bg-black opacity-70"
+            className="fixed inset-0 bg-gray-100 opacity-70"
             onClick={() => setShowAddAction(false)}
           >
           </div>

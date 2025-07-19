@@ -259,7 +259,7 @@ const BroadCast = () => {
                 </div>
 
                 {/* Campaign Filter Controls */}
-                <div id="campaign-filters" className="flex flex-wrap items-center gap-4 mb-6">
+                <div id="campaign-filters" className="md:flex flex-wrap items-center gap-4 mb-6">
                     <div className="relative">
                         <input
                             type="text"
@@ -310,7 +310,7 @@ const BroadCast = () => {
                         {/* <KeyboardArrowDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" /> */}
                     </div>
 
-                    <button className="ml-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 flex items-center">
+                    <button className="md:ml-auto px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 flex items-center">
                         <FilterAlt className="mr-2" />
                         More Filters
                     </button>
@@ -318,7 +318,7 @@ const BroadCast = () => {
 
                 {/* Campaign Table */}
                 <div id="campaign-table" className=" bg-white shadow-sm rounded-lg overflow-hidden mb-6">
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto w-[295px] md:w-[740px] lg:w-auto">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>

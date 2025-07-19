@@ -23,14 +23,14 @@ const Contacts = () => {
     const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     return (
-        <div className="min-h-screen mt-16 bg-gray-50 p-3 font-sans">
-            <div className="mb-6">
+        <div className="min-h-screen mt-16 bg-gray-50  font-sans">
+            <div className="mb-6 p-3">
                 <h1 className="text-2xl font-bold text-gray-900">Contact Management</h1>
                 <p className="text-gray-600">Manage your contact groups and individual contacts</p>
             </div>
 
-            <div className="grid grid-cols-12 gap-6">
-                <div className="col-span-3">
+            <div className="lg:flex gap-6">
+                <div className="flex-1">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                         <div className="p-4 border-b border-gray-200">
                             <div className="flex items-center justify-between mb-4">
@@ -76,18 +76,17 @@ const Contacts = () => {
                 </div>
 
                 {/* Contact Table */}
-                <div className="col-span-9">
+                <div className="md:flex-3 flex-2">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
                         {/* Controls */}
-                        <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center space-x-4">
+                        <div className="md:flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-2">
                                 <div className="relative">
                                     <input
                                         type="text"
                                         placeholder="Search contacts..."
-                                        className="pl-8 pr-3 py-2 border border-gray-300 rounded-lg w-64"
+                                        className="pl-3 pr-3 py-2 border border-gray-300 rounded-lg w-40 md:w-64"
                                     />
-                                    <i className="fa-solid fa-search absolute left-2.5 top-2.5 text-gray-400"></i>
                                 </div>
                                 <select className="px-3 py-2 border border-gray-300 rounded-lg">
                                     <option>All Channels</option>
@@ -96,16 +95,18 @@ const Contacts = () => {
                                     <option>Voice</option>
                                 </select>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
-                                    <Download fontSize="small" /> Export
-                                </button>
-                                <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
-                                    <Upload fontSize="small" /> Import
-                                </button>
+                            <div className="md:flex items-center space-x-2">
+                                <div className="flex gap-2">
+                                    <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
+                                        <Download fontSize="small" /> Export
+                                    </button>
+                                    <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
+                                        <Upload fontSize="small" /> Import
+                                    </button>
+                                </div>
                                 <button
                                     onClick={toggleModal}
-                                    className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-1"
+                                    className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-1 mt-3 md:mt-0"
                                 >
                                     <Add fontSize="small" /> Add Contact
                                 </button>
@@ -113,7 +114,7 @@ const Contacts = () => {
                         </div>
 
                         {/* Table */}
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto w-[285px] md:w-[740px] lg:w-auto">
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
@@ -130,7 +131,6 @@ const Contacts = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {/* Sample Contact 1 */}
                                     <tr className="hover:bg-gray-50">
                                         <td className="px-4 py-4"><input type="checkbox" className="rounded" /></td>
                                         <td className="px-4 py-4">
@@ -165,15 +165,15 @@ const Contacts = () => {
                                             </div>
                                         </td>
                                     </tr>
-                                    {/* Additional rows can be added here */}
                                 </tbody>
                             </table>
                         </div>
-                        <div className="px-4 py-3 border-t border-gray-200 flex items-center justify-between">
+
+                        <div className="md:px-4 py-3 border-t border-gray-200 md:flex items-center justify-between ">
                             <div className="text-sm text-gray-700">
                                 Showing 1 to 20 of 1,247 contacts
                             </div>
-                            <div className="flex space-x-2">
+                            <div className="flex space-x-2 mt-2 md:mt-0">
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
                                 <button className="px-3 py-1 bg-primary-600 text-white rounded text-sm">1</button>
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>

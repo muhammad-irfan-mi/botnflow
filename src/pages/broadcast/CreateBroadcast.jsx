@@ -83,7 +83,6 @@ const CreateBroadcast = () => {
     <div className="mt-16 bg-gray-50">
 
       <div className="flex">
-
         {/* Main Content */}
         <main className="flex-1 bg-white">
           <div className="p-3">
@@ -95,7 +94,7 @@ const CreateBroadcast = () => {
 
             {/* Progress Steps */}
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
+              <div className="hidden md:flex items-center justify-between mb-4">
                 {steps.map((step, index) => (
                   <div key={step.id} className="flex items-center">
                     <div
@@ -441,16 +440,16 @@ const CreateBroadcast = () => {
                     </div>
                   </div>
 
-                  <div className="flex space-x-4">
+                  <div className="md:flex md:space-x-4">
                     <button
                       onClick={launchBroadcast}
-                      className="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700"
+                      className="bg-green-600 w-full md:w-auto text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700"
                     >
                       <RocketLaunch className="mr-2" /> Launch Broadcast
                     </button>
                     <button
                       onClick={saveDraft}
-                      className="bg-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700"
+                      className="bg-gray-600 w-full md:w-auto mt-3 md:mt0 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700"
                     >
                       <Save className="mr-2" /> Save as Draft
                     </button>
@@ -463,11 +462,11 @@ const CreateBroadcast = () => {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between pt-6 border-t border-gray-200 px-8 pb-8">
+      <div className="md:flex justify-between pt-6 border-t border-gray-200 px-8 pb-8">
         {currentStep > 1 && (
           <button
             onClick={previousStep}
-            className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700"
+            className="bg-gray-600 w-full md:w-auto text-white px-6 py-2 rounded-lg hover:bg-gray-700"
           >
             <ArrowBack className="mr-2" /> Previous
           </button>
@@ -478,7 +477,7 @@ const CreateBroadcast = () => {
           <button
             onClick={nextStep}
             disabled={!canProceed()}
-            className={`text-white px-6 py-2 rounded-lg ${canProceed() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+            className={`text-white w-full md:w-auto mt-3 md:mt-0 px-6 py-2 rounded-lg ${canProceed() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
               }`}
           >
             Next <ArrowForward className="ml-2" />
