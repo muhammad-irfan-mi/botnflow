@@ -380,11 +380,11 @@ const AgentDashboard = () => {
         </div>
 
         {/* Agent Leaderboard */}
-        {/* <div id="agent-leaderboard" className="bg-white rounded-lg shadow-sm mb-6">
+        <div id="agent-leaderboard" className="bg-white rounded-lg shadow-sm mb-6">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-800">Agent Leaderboard</h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[295px] md:w-[740px] lg:w-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -437,7 +437,7 @@ const AgentDashboard = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                        <div className="h-2.5 bg-green-500 rounded-full" style={{width: '40%'}}></div>
+                        <div className="h-2.5 bg-green-500 rounded-full" style={{ width: '40%' }}></div>
                       </div>
                       <span className="text-sm text-gray-900">6</span>
                     </div>
@@ -476,7 +476,7 @@ const AgentDashboard = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                        <div className="h-2.5 bg-green-500 rounded-full" style={{width: '53%'}}></div>
+                        <div className="h-2.5 bg-green-500 rounded-full" style={{ width: '53%' }}></div>
                       </div>
                       <span className="text-sm text-gray-900">8</span>
                     </div>
@@ -515,7 +515,7 @@ const AgentDashboard = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                        <div className="h-2.5 bg-yellow-500 rounded-full" style={{width: '73%'}}></div>
+                        <div className="h-2.5 bg-yellow-500 rounded-full" style={{ width: '73%' }}></div>
                       </div>
                       <span className="text-sm text-gray-900">11</span>
                     </div>
@@ -554,7 +554,7 @@ const AgentDashboard = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                        <div className="h-2.5 bg-red-500 rounded-full" style={{width: '100%'}}></div>
+                        <div className="h-2.5 bg-red-500 rounded-full" style={{ width: '100%' }}></div>
                       </div>
                       <span className="text-sm text-gray-900">15</span>
                     </div>
@@ -593,7 +593,7 @@ const AgentDashboard = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="h-2.5 w-16 bg-gray-200 rounded-full mr-2">
-                        <div className="h-2.5 bg-green-500 rounded-full" style={{width: '27%'}}></div>
+                        <div className="h-2.5 bg-green-500 rounded-full" style={{ width: '27%' }}></div>
                       </div>
                       <span className="text-sm text-gray-900">4</span>
                     </div>
@@ -613,7 +613,7 @@ const AgentDashboard = () => {
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button className="text-sm text-primary-600 hover:text-primary-900">View All Agents <ArrowForwardIcon className="ml-1 text-xs" /></button>
           </div>
-        </div> */}
+        </div>
 
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -645,12 +645,12 @@ const AgentDashboard = () => {
         </div>
 
         {/* Missed or Delayed Follow-ups */}
-        {/* <div id="missed-followups" className="bg-white rounded-lg shadow-sm mb-6">
+        <div id="missed-followups" className="bg-white rounded-lg shadow-sm mb-6">
           <div className="p-4 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-gray-800">Missed or Delayed Follow-ups</h2>
             <span className="px-3 py-1 text-sm bg-red-100 text-red-800 rounded-full">8 total</span>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[295px] md:w-[740px] lg:w-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -768,7 +768,7 @@ const AgentDashboard = () => {
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button className="text-sm text-primary-600 hover:text-primary-900">View All Missed Follow-ups <ArrowForwardIcon className="ml-1 text-xs" /></button>
           </div>
-        </div> */}
+        </div>
 
         {/* Real-time Agent Activity */}
         <div id="realtime-activity" className="bg-white rounded-lg shadow-sm mb-6">

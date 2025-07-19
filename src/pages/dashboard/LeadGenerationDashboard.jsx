@@ -141,7 +141,7 @@ const LeadGenerationDashboard = () => {
                         <span className="text-white font-semibold">752</span>
                       </div>
                       <div className="w-3/4 h-0 border-l-[15px] border-r-[15px] border-t-[15px] border-transparent border-t-blue-500"></div>
-                      <p className="mt-2 text-sm font-medium text-gray-700">New</p>
+                      <p className="mt-2 text-sm md:font-medium text-gray-700">New</p>
                       <p className="text-xs text-gray-500">100%</p>
                     </div>
                     
@@ -151,7 +151,7 @@ const LeadGenerationDashboard = () => {
                         <span className="text-white font-semibold">524</span>
                       </div>
                       <div className="w-3/4 h-0 border-l-[15px] border-r-[15px] border-t-[15px] border-transparent border-t-green-500"></div>
-                      <p className="mt-2 text-sm font-medium text-gray-700">Contacted</p>
+                      <p className="mt-2 text-sm md:font-medium text-gray-700">Contacted</p>
                       <p className="text-xs text-gray-500">69.7%</p>
                     </div>
                     
@@ -161,7 +161,7 @@ const LeadGenerationDashboard = () => {
                         <span className="text-white font-semibold">428</span>
                       </div>
                       <div className="w-3/4 h-0 border-l-[15px] border-r-[15px] border-t-[15px] border-transparent border-t-yellow-500"></div>
-                      <p className="mt-2 text-sm font-medium text-gray-700">Qualified</p>
+                      <p className="mt-2 text-sm md:font-medium text-gray-700">Qualified</p>
                       <p className="text-xs text-gray-500">56.9%</p>
                     </div>
                     
@@ -171,7 +171,7 @@ const LeadGenerationDashboard = () => {
                         <span className="text-white font-semibold">176</span>
                       </div>
                       <div className="w-3/4 h-0 border-l-[15px] border-r-[15px] border-t-[15px] border-transparent border-t-purple-500"></div>
-                      <p className="mt-2 text-sm font-medium text-gray-700">Converted</p>
+                      <p className="mt-2 text-sm md:font-medium text-gray-700">Converted</p>
                       <p className="text-xs text-gray-500">23.4%</p>
                     </div>
                     
@@ -181,7 +181,7 @@ const LeadGenerationDashboard = () => {
                         <span className="text-white font-semibold">148</span>
                       </div>
                       <div className="w-3/4 h-0 border-l-[15px] border-r-[15px] border-t-[15px] border-transparent border-t-red-500"></div>
-                      <p className="mt-2 text-sm font-medium text-gray-700">Lost</p>
+                      <p className="mt-2 text-sm md:font-medium text-gray-700">Lost</p>
                       <p className="text-xs text-gray-500">19.7%</p>
                     </div>
                   </div>
@@ -191,9 +191,9 @@ const LeadGenerationDashboard = () => {
               {/* Channel Source Analytics */}
               <div className="bg-white rounded-lg shadow">
                 <div className="px-5 py-4 border-b border-gray-200">
-                  <div className="flex items-center justify-between">
+                  <div className="md:flex items-center justify-between">
                     <h2 className="text-lg font-medium text-gray-800">Channel Source Analytics</h2>
-                    <div className="flex space-x-3">
+                    <div className="flex items-center space-x-3">
                       <div className="relative">
                         <select className="bg-white border border-gray-300 rounded-md pl-3 pr-8 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                           <option>Today</option>
@@ -201,11 +201,8 @@ const LeadGenerationDashboard = () => {
                           <option>This Month</option>
                           <option>Custom Range</option>
                         </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                          <KeyboardArrowDown className="text-xs" />
-                        </div>
                       </div>
-                      <div className="flex border border-gray-300 rounded-md">
+                      <div className="flex h-10 border border-gray-300 rounded-md">
                         <button className="px-3 py-1 text-sm bg-blue-50 text-blue-600 border-r border-gray-300">Chart</button>
                         <button className="px-3 py-1 text-sm text-gray-700">Table</button>
                       </div>

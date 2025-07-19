@@ -239,7 +239,7 @@ const CampaignDashboard = () => {
               </div>
             </div>
             <div id="quick-actions" className="md:flex justify-between space-x-2 space-y-3 md:space-y-0">
-              <button className="bg-indigo-600 text-white w-full px-4 py-2 rounded-md text-sm font-medium flex items-center">
+              <button className="bg-indigo-600 text-white w-full md:w-fit px-4 py-2 rounded-md text-sm font-medium flex items-center">
                 <Add className="mr-2" style={{ fontSize: '1rem' }} />
                 Create Campaign
               </button>
@@ -335,12 +335,12 @@ const CampaignDashboard = () => {
               </div>
             </div>
           </div>
-   
+
           {/* Campaign Performance Chart */}
-          {/* <div id="performance-chart" className="w-full bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
-            <div className="flex justify-between items-center mb-4">
+          <div id="performance-chart" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+            <div className="md:flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign Performance</h3>
-              <div className="flex items-center space-x-3">
+              <div className="md:flex items-center space-x-3 space-y-1 md:space-y-0">
                 <div className="flex items-center">
                   <span className="w-3 h-3 bg-indigo-500 rounded-full mr-1"></span>
                   <span className="text-xs text-gray-600">Leads Generated</span>
@@ -365,7 +365,7 @@ const CampaignDashboard = () => {
               options={campaignChartOptions}
               containerProps={{ style: { height: '300px' } }}
             />
-          </div> */}
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             {/* Campaign Type Breakdown */}
@@ -499,20 +499,20 @@ const CampaignDashboard = () => {
           </div>
 
           {/* Geo Heatmap of Campaign Response */}
-          {/* <div id="geo-heatmap" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">Geo Distribution of Campaign Responses</h3>
-              <div className="flex items-center space-x-3">
+          <div id="geo-heatmap" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+            <div className="md:flex justify-between items-center mb-4">
+              <h3 className="font-medium text-sm md:text-md">Geo Distribution of Campaign Responses</h3>
+              <div className="flex items-center space-x-3 mt-3 md:mt-0">
                 <div className="relative">
                   <div className="border border-gray-300 rounded-md px-3 py-1.5 flex items-center bg-white text-sm">
                     <span className="text-gray-700">All Campaigns</span>
-                    <ExpandMore className="ml-2 text-gray-500" style={{ fontSize: '0.75rem' }} />
+                    <ExpandMore className="ml-0 md:ml-2 text-gray-500" style={{ fontSize: '0.75rem' }} />
                   </div>
                 </div>
                 <div className="relative">
                   <div className="border border-gray-300 rounded-md px-3 py-1.5 flex items-center bg-white text-sm">
                     <span className="text-gray-700">All Channels</span>
-                    <ExpandMore className="ml-2 text-gray-500" style={{ fontSize: '0.75rem' }} />
+                    <ExpandMore className="ml-0 md:ml-2 text-gray-500" style={{ fontSize: '0.75rem' }} />
                   </div>
                 </div>
               </div>
@@ -569,7 +569,7 @@ const CampaignDashboard = () => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
 
           {/* Channel-wise Campaign Summary */}
           <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
@@ -687,7 +687,7 @@ const CampaignDashboard = () => {
 
           {/* Campaign List & Stats */}
           {/* <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
-            <div className="flex justify-between items-center mb-4">
+            <div className="md:flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign List</h3>
               <div className="flex items-center space-x-3">
                 <div className="relative">
@@ -707,7 +707,7 @@ const CampaignDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="overflow-x-auto w-[600px] md:w-[720px] lg:w-full">
+            <div className="overflow-x-auto w-[320px] sm:w-[380px] md:w-[412px] lg:w-auto">
               <table className="min-w-full bg-white text-sm text-left text-gray-700">
                 <thead>
                   <tr className="text-xs font-medium text-gray-500 uppercase bg-gray-50 tracking-wider">
@@ -769,9 +769,9 @@ const CampaignDashboard = () => {
                 </tbody>
               </table>
             </div>
-            <div className="flex items-center justify-between mt-4">
+            <div className="md:flex items-center justify-between mt-4">
               <div className="text-sm text-gray-500">Showing 5 of 16 campaigns</div>
-              <div className="flex space-x-1">
+              <div className="flex space-x-1 mt-2 md:mt-0">
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">Previous</button>
                 <button className="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm">1</button>
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">2</button>

@@ -152,7 +152,7 @@ function AppContent() {
           `}>
             <AppRoute />
             <div className={`
-              fixed top-[95%] md:top-[92%] 
+              md:fixed top-[90%] md:top-[92%] 
               ${showSidebar && screenSize === 'desktop' ? 'w-[calc(100%-16rem)]' : 'w-full'}
             `}>
               {!isAuthPage && <Footer />}
