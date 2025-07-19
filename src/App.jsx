@@ -12,7 +12,6 @@ function AppContent() {
   const [showSidebar, setShowSidebar] = useState(true);
 
   const isAuthPage = ['/', '/login', '/signup', '/forgot-password', '/verify-opt', '/flow'].includes(location.pathname);
-console.log('Hello World')
   return (
     <>
       <div className='h-1'>
