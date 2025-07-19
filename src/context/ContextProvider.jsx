@@ -1,0 +1,66 @@
+import { createContext, useState, useCallback } from 'react';
+import axios from 'axios';
+
+export const ContentContext = createContext();
+
+export const ContextProvider = ({ children }) => {
+  const [nodeContents, setNodeContents] = useState({});
+  const [currentFlowId, setCurrentFlowId] = useState(null);
+  const [role , setRole] = useState('');
+
+  const saveContentToServer = useCallback(async (nodeId, content) => {
+    if (!currentFlowId) return;
+
+    try {
+      await axios.post(`http://localhost:5001/api/save-content/${currentFlowId}`, {
+        nodeId,
+        content
+      });
+    } catch (error) {
+      console.error('Error saving content:', error);
+    }
+  }, [currentFlowId]);
+
+  const setContentForNode = useCallback((nodeId, contentItems) => {
+    const processedContent = contentItems.map(item => {
+      if (item.value instanceof File) {
+        return {
+          ...item,
+          value: {
+            name: item.value.name,
+            type: item.value.type,
+            size: item.value.size,
+            lastModified: item.value.lastModified,
+            isFile: true
+          }
+        };
+      }
+      return item;
+    });
+
+    setNodeContents(prev => ({
+      ...prev,
+      [nodeId]: processedContent
+    }));
+
+    saveContentToServer(nodeId, processedContent);
+  }, [saveContentToServer]);
+
+  const getContentForNode = (nodeId) => {
+    return nodeContents[nodeId] || [];
+  };
+
+  return (
+    <ContentContext.Provider value={{
+      getContentForNode,
+      setContentForNode,
+      currentFlowId,
+      setCurrentFlowId,
+      nodeContents,
+      role,
+      setRole
+    }}>
+      {children}
+    </ContentContext.Provider>
+  );
+};
