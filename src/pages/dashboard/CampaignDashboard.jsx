@@ -100,7 +100,8 @@ const CampaignDashboard = () => {
       shared: true
     }
   };
-
+alert(innerHeight)
+alert(innerWidth)
   // Campaign Type Breakdown Chart options
   const campaignTypeChartOptions = {
     chart: {
@@ -336,7 +337,7 @@ const CampaignDashboard = () => {
               </div>
             </div>
           </div>
-
+   
           {/* Campaign Performance Chart */}
           <div id="performance-chart" className="w-full bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
             <div className="flex justify-between items-center mb-4">
