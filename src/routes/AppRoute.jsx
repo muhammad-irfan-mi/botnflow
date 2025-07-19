@@ -5,7 +5,7 @@ import ForgotPassword from '../component/auth/ForgotPassword';
 import OtpVerification from '../component/auth/OtpVerification';
 import Contacts from '../pages/contact/Contact';
 import Conversation from '../pages/conversation/Conversation';
-import AIAgent from '../pages/intent/AIAgent';
+import AIAgent from '../pages/aiAgent/AIAgent';
 import CreateBroadcast from '../pages/broadcast/CreateBroadcast';
 import AgentDashBoard from '../pages/agentDashboard/AgentDashBoard';
 import CallAnalytic from '../pages/callanalytics/CallAnalytic';
@@ -19,6 +19,7 @@ import LeadGenerationDashboard from '../pages/dashboard/LeadGenerationDashboard'
 import DashboardList from '../pages/dashboard/DashboardList';
 import Flow from '../pages/ReactFlow/Flow';
 import BroadCast from '../pages/broadcast/BroadCast';
+import AiAgentList from '../pages/aiAgent/AiAgentList';
 
 
 function AppRoute() {
@@ -34,6 +35,7 @@ function AppRoute() {
         <Route path="/dashboard" element={<DashboardList />} />
         <Route path="/contact" element={<Contacts />} />
         <Route path="/conversation" element={<Conversation />} />
+        <Route path="/aiagent-list" element={<AiAgentList />} />
         <Route path="/ai-agent" element={<AIAgent />} />
         <Route path="/broadcast" element={<BroadCast />} />
         <Route path="/create-broadcast" element={<CreateBroadcast />} />

@@ -9,7 +9,7 @@ function DashboardList() {
 
     return (
         <div className='mt-16 bg-gray-50'>
-            <div className="bg-white border-b sticky top-16 z-40">
+            <div className="bg-white border-b sticky top-16 z-10">
                 <div className="max-w-7xl mx-auto">
                     <nav className="flex -mb-px">
                         <span

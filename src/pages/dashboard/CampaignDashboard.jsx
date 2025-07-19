@@ -160,12 +160,71 @@ const CampaignDashboard = () => {
     }]
   };
 
+  const campaigns = [
+    {
+      name: 'Summer Promo 2023',
+      goal: 'Lead Generation',
+      dates: 'Apr 01 - Apr 30',
+      leads: 486,
+      conversion: '42.5%',
+      conversionColor: 'bg-green-100 text-green-800',
+      cpl: '$3.28',
+      channels: [<WhatsApp className="text-green-600" />, <Email className="text-purple-600" />],
+      statusColor: 'bg-green-500'
+    },
+    {
+      name: 'New Product Launch',
+      goal: 'Promotional',
+      dates: 'Apr 05 - Apr 25',
+      leads: 324,
+      conversion: '38.2%',
+      conversionColor: 'bg-green-100 text-green-800',
+      cpl: '$4.12',
+      channels: [<Chat className="text-blue-600" />, <Email className="text-purple-600" />],
+      statusColor: 'bg-green-500'
+    },
+    {
+      name: 'Abandoned Cart Recovery',
+      goal: 'Abandoned Cart',
+      dates: 'Apr 01 - Apr 30',
+      leads: 198,
+      conversion: '24.3%',
+      conversionColor: 'bg-yellow-100 text-yellow-800',
+      cpl: '$5.76',
+      channels: [<WhatsApp className="text-green-600" />],
+      statusColor: 'bg-yellow-500'
+    },
+    {
+      name: 'Spring Sale Reminder',
+      goal: 'Event/Reminder',
+      dates: 'Apr 10 - Apr 15',
+      leads: 156,
+      conversion: '12.8%',
+      conversionColor: 'bg-red-100 text-red-800',
+      cpl: '$8.45',
+      channels: [<Phone className="text-amber-600" />, <Email className="text-purple-600" />],
+      statusColor: 'bg-red-500'
+    },
+    {
+      name: 'Customer Feedback',
+      goal: 'Follow-up Nurturing',
+      dates: 'Apr 01 - Apr 30',
+      leads: 245,
+      conversion: '32.1%',
+      conversionColor: 'bg-green-100 text-green-800',
+      cpl: '$3.95',
+      channels: [<WhatsApp className="text-green-600" />, <Chat className="text-blue-600" />],
+      statusColor: 'bg-green-500'
+    }
+  ];
+
   return (
     <div className="bg-gray-50 font-sans">
       <div className="min-h-screen">
         <div className="p-3">
-          <div id="dashboard-controls" className="flex justify-between items-center mb-6">
-            <div className="flex items-center space-x-3">
+
+          <div id="dashboard-controls" className="lg:flex justify-between items-center mb-6 lg:space-y-0 space-y-3">
+            <div className="flex justify-between items-center space-x-3">
               <div className="relative">
                 <div className="border border-gray-300 rounded-md px-4 py-2 flex items-center bg-white">
                   <CalendarToday className="mr-2 text-gray-500" style={{ fontSize: '1rem' }} />
@@ -180,23 +239,25 @@ const CampaignDashboard = () => {
                 </div>
               </div>
             </div>
-            <div id="quick-actions" className="flex space-x-2">
+            <div id="quick-actions" className="flex justify-between space-x-2">
               <button className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center">
                 <Add className="mr-2" style={{ fontSize: '1rem' }} />
                 Create Campaign
               </button>
-              <button className="border border-gray-300 bg-white text-gray-700 px-4 py-2 rounded-md text-sm font-medium flex items-center">
-                <Download className="mr-2" style={{ fontSize: '1rem' }} />
-                Export Report
-              </button>
-              <button className="border border-gray-300 bg-white text-gray-700 px-3 py-2 rounded-md">
-                <MoreVert style={{ fontSize: '1rem' }} />
-              </button>
+              <div className='flex gap-3'>
+                <button className="border border-gray-300 bg-white text-gray-700 px-4 py-2 rounded-md text-sm font-medium flex items-center">
+                  <Download className="mr-2" style={{ fontSize: '1rem' }} />
+                  Export Report
+                </button>
+                <button className="border border-gray-300 bg-white text-gray-700 px-3 py-2 rounded-md">
+                  <MoreVert style={{ fontSize: '1rem' }} />
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Top Campaign Summary Cards */}
-          <div id="summary-cards" className="grid grid-cols-6 gap-4 mb-6">
+          <div id="summary-cards" className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">TOTAL CAMPAIGNS RUNNING</h3>
@@ -210,7 +271,7 @@ const CampaignDashboard = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">LEADS GENERATED THIS WEEK</h3>
@@ -224,7 +285,7 @@ const CampaignDashboard = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">OVERALL CONVERSION RATE</h3>
@@ -238,7 +299,7 @@ const CampaignDashboard = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">TOP PERFORMING CAMPAIGN</h3>
@@ -249,7 +310,7 @@ const CampaignDashboard = () => {
                 <span className="text-xs text-gray-500">42.5% conversion</span>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">COST PER LEAD (AVG)</h3>
@@ -263,7 +324,7 @@ const CampaignDashboard = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xs font-medium text-gray-500">MOST ENGAGED CHANNEL</h3>
@@ -277,7 +338,7 @@ const CampaignDashboard = () => {
           </div>
 
           {/* Campaign Performance Chart */}
-          <div id="performance-chart" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+          <div id="performance-chart" className="w-full bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign Performance</h3>
               <div className="flex items-center space-x-3">
@@ -307,7 +368,7 @@ const CampaignDashboard = () => {
             />
           </div>
 
-          <div className="grid grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             {/* Campaign Type Breakdown */}
             <div id="campaign-type" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <div className="flex justify-between items-center mb-4">
@@ -351,8 +412,8 @@ const CampaignDashboard = () => {
                 <h3 className="font-medium">A/B Test Results</h3>
                 <button className="text-xs text-indigo-600 font-medium">View All Tests</button>
               </div>
-              <div className="flex space-x-3">
-                <div className="flex-1 border border-gray-200 rounded-md p-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="border border-gray-200 rounded-md p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-medium text-gray-500">VERSION A</span>
                     <span className="text-xs px-2 py-0.5 bg-green-100 text-green-600 rounded-full">Winner</span>
@@ -373,7 +434,7 @@ const CampaignDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 border border-gray-200 rounded-md p-3">
+                <div className=" border border-gray-200 rounded-md p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-medium text-gray-500">VERSION B</span>
                   </div>
@@ -457,13 +518,13 @@ const CampaignDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="flex space-x-4">
-              <div className="w-3/4">
+            <div className="md:flex md:space-x-4">
+              <div className="flex-3">
                 <div className="h-[300px] bg-gray-100 rounded-md overflow-hidden">
                   <img className="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b3329cb48a-395eb8786e950816ae4b.png" alt="map visualization showing heat map of campaign responses across different regions with darker colors showing higher engagement" />
                 </div>
               </div>
-              <div className="w-1/4">
+              <div className="flex-1 mt-5 md:mt-0">
                 <h4 className="text-sm font-medium mb-3">Top Performing Regions</h4>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -517,7 +578,7 @@ const CampaignDashboard = () => {
               <h3 className="font-medium">Channel Performance</h3>
               <button className="text-xs text-indigo-600 font-medium">View Detailed Report</button>
             </div>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="border border-gray-200 rounded-md p-3">
                 <div className="flex items-center mb-3">
                   <div className="w-8 h-8 bg-green-100 rounded-md flex items-center justify-center mr-2">
@@ -647,235 +708,65 @@ const CampaignDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
+            <div className="overflow-x-auto w-[600px] md:w-[720px] lg:w-full">
+              <table className="min-w-full bg-white text-sm text-left text-gray-700">
                 <thead>
-                  <tr className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        Campaign Name
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        Goal
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        Dates
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        Leads
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        Conversion
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">
-                      <div className="flex items-center">
-                        CPL
-                        <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
-                      </div>
-                    </th>
-                    <th className="px-4 py-3 border-b border-gray-200">Channels</th>
-                    <th className="px-4 py-3 border-b border-gray-200">Actions</th>
+                  <tr className="text-xs font-medium text-gray-500 uppercase bg-gray-50 tracking-wider">
+                    {['Campaign Name', 'Goal', 'Dates', 'Leads', 'Conversion', 'CPL', 'Channels', 'Actions'].map((heading) => (
+                      <th key={heading} className="px-4 py-3 border-b border-gray-200 whitespace-nowrap">
+                        <div className="flex items-center">
+                          {heading}
+                          {['Campaign Name', 'Goal', 'Dates', 'Leads', 'Conversion', 'CPL'].includes(heading) && (
+                            <ExpandMore className="ml-1" style={{ fontSize: '1rem' }} />
+                          )}
+                        </div>
+                      </th>
+                    ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                        <span className="font-medium text-sm">Summer Promo 2023</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">Lead Generation</td>
-                    <td className="px-4 py-3 text-sm">Apr 01 - Apr 30</td>
-                    <td className="px-4 py-3 text-sm font-medium">486</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">42.5%</span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">$3.28</td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-1">
-                        <WhatsApp className="text-green-600" style={{ fontSize: '1.25rem' }} />
-                        <Email className="text-purple-600" style={{ fontSize: '1.25rem' }} />
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-800">
-                          <Visibility style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Edit style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Pause style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <FileCopy style={{ fontSize: '1.25rem' }} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                        <span className="font-medium text-sm">New Product Launch</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">Promotional</td>
-                    <td className="px-4 py-3 text-sm">Apr 05 - Apr 25</td>
-                    <td className="px-4 py-3 text-sm font-medium">324</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">38.2%</span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">$4.12</td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-1">
-                        <Chat className="text-blue-600" style={{ fontSize: '1.25rem' }} />
-                        <Email className="text-purple-600" style={{ fontSize: '1.25rem' }} />
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-800">
-                          <Visibility style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Edit style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Pause style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <FileCopy style={{ fontSize: '1.25rem' }} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                        <span className="font-medium text-sm">Abandoned Cart Recovery</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">Abandoned Cart</td>
-                    <td className="px-4 py-3 text-sm">Apr 01 - Apr 30</td>
-                    <td className="px-4 py-3 text-sm font-medium">198</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">24.3%</span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">$5.76</td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-1">
-                        <WhatsApp className="text-green-600" style={{ fontSize: '1.25rem' }} />
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-800">
-                          <Visibility style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Edit style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Pause style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <FileCopy style={{ fontSize: '1.25rem' }} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
-                        <span className="font-medium text-sm">Spring Sale Reminder</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">Event/Reminder</td>
-                    <td className="px-4 py-3 text-sm">Apr 10 - Apr 15</td>
-                    <td className="px-4 py-3 text-sm font-medium">156</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">12.8%</span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">$8.45</td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-1">
-                        <Phone className="text-amber-600" style={{ fontSize: '1.25rem' }} />
-                        <Email className="text-purple-600" style={{ fontSize: '1.25rem' }} />
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-800">
-                          <Visibility style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Edit style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Pause style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <FileCopy style={{ fontSize: '1.25rem' }} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                        <span className="font-medium text-sm">Customer Feedback</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-sm">Follow-up Nurturing</td>
-                    <td className="px-4 py-3 text-sm">Apr 01 - Apr 30</td>
-                    <td className="px-4 py-3 text-sm font-medium">245</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">32.1%</span>
-                    </td>
-                    <td className="px-4 py-3 text-sm">$3.95</td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-1">
-                        <WhatsApp className="text-green-600" style={{ fontSize: '1.25rem' }} />
-                        <Chat className="text-blue-600" style={{ fontSize: '1.25rem' }} />
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-800">
-                          <Visibility style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Edit style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <Pause style={{ fontSize: '1.25rem' }} />
-                        </button>
-                        <button className="text-gray-600 hover:text-gray-800">
-                          <FileCopy style={{ fontSize: '1.25rem' }} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody className="divide-y divide-gray-200">
+                  {campaigns.map((campaign, idx) => (
+                    <tr key={idx}>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <span className={`w-2 h-2 ${campaign.statusColor} rounded-full mr-2`}></span>
+                          <span className="font-medium text-sm">{campaign.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-sm">{campaign.goal}</td>
+                      <td className="px-4 py-3 text-sm">{campaign.dates}</td>
+                      <td className="px-4 py-3 text-sm font-medium">{campaign.leads}</td>
+                      <td className="px-4 py-3">
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${campaign.conversionColor}`}>
+                          {campaign.conversion}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm">{campaign.cpl}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex space-x-1">
+                          {campaign.channels.map((icon, i) => (
+                            <span key={i} className="inline-block">{icon}</span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex space-x-2">
+                          <button className="text-indigo-600 hover:text-indigo-800">
+                            <Visibility style={{ fontSize: '1.25rem' }} />
+                          </button>
+                          <button className="text-gray-600 hover:text-gray-800">
+                            <Edit style={{ fontSize: '1.25rem' }} />
+                          </button>
+                          <button className="text-gray-600 hover:text-gray-800">
+                            <Pause style={{ fontSize: '1.25rem' }} />
+                          </button>
+                          <button className="text-gray-600 hover:text-gray-800">
+                            <FileCopy style={{ fontSize: '1.25rem' }} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

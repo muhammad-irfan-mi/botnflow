@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 import { ContentContext } from '../../context/ContextProvider';
 
-const Header = ({ onToggleSidebar }) => {
+const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
   const { role, setRole } = useContext(ContentContext)
   const [dropdown, setDropdown] = useState('');
   const [currentStatus, setCurrentStatus] = useState('online');
@@ -69,7 +69,8 @@ const Header = ({ onToggleSidebar }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 h-16">
+    // <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 h-16">
+    <header className={`fixed top-0 left-0 right-0 bg-white shadow-sm ${isSidebarOpen ? 'z-20' : 'z-50'} h-16`}>
       <div className="flex items-center justify-between px-4 h-full">
         {/* Left Side */}
         <div className="flex items-center">

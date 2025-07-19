@@ -1,0 +1,804 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "colors": {
+        "primary": {
+          "50": "#EEF2FF",
+          "100": "#E0E7FF",
+          "200": "#C7D2FE",
+          "300": "#A5B4FC",
+          "400": "#818CF8",
+          "500": "#6366F1",
+          "600": "#4F46E5",
+          "700": "#4338CA",
+          "800": "#3730A3",
+          "900": "#312E81"
+        }
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+      body {
+        font-family: 'Inter', sans-serif !important;
+      }
+      
+      /* Preserve Font Awesome icons */
+      .fa, .fas, .far, .fal, .fab {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+      }
+    </style><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="flex justify-between items-center px-6 py-3">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold mr-2 text-primary-600">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h1 class="text-xl font-semibold text-gray-800">AI Agents</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+                </div>
+                <div class="relative">
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fa-solid fa-question-circle"></i>
+                    </button>
+                </div>
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="User Avatar" class="w-8 h-8 rounded-full border border-gray-200">
+                </div>
+                <button id="create-agent-btn" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md flex items-center text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Create New Agent
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="main-content" class="container mx-auto px-6 py-6">
+        <!-- Search & Filters -->
+        <div id="search-filters" class="mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+                    <input type="text" placeholder="Search agents by name or keyword" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all">
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                            <option value="">Language: All</option>
+                            <option value="en">English</option>
+                            <option value="ur">Urdu</option>
+                            <option value="ar">Arabic</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                            <option value="">Status: All</option>
+                            <option value="ready">Ready</option>
+                            <option value="training">Training</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                            <option value="">Domain: All</option>
+                            <option value="support">Support</option>
+                            <option value="sales">Sales</option>
+                            <option value="faq">FAQ Bot</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <div class="relative">
+                        <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                            <option value="">Created By: All</option>
+                            <option value="me">Me</option>
+                            <option value="team">Team</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div id="view-toggle" class="flex justify-between items-center mb-4">
+            <div class="text-sm text-gray-500">
+                Showing <span class="font-medium">8</span> agents
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-sm text-gray-600">View:</span>
+                <button class="bg-primary-100 text-primary-600 p-1.5 rounded">
+                    <i class="fa-solid fa-th-large"></i>
+                </button>
+                <button class="text-gray-400 hover:text-gray-600 p-1.5 rounded">
+                    <i class="fa-solid fa-list"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Agent Grid -->
+        <div id="agent-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Agent Card 1 -->
+            <div id="agent-card-1" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-headset text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Support Assistant</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Ready</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Customer support agent trained to handle technical issues and product inquiries.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>42 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>18 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>320 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 2 days ago</span>
+                        <span>Last trained: Today</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 2 -->
+            <div id="agent-card-2" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-shopping-cart text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Sales Bot</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">Training</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Assists customers with product recommendations and purchase decisions.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>28 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>12 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>186 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 4 hours ago</span>
+                        <span>Training: 38%</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 3 -->
+            <div id="agent-card-3" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-question-circle text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">FAQ Assistant</h3>
+                                <span class="text-xs text-gray-500">Arabic</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Ready</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Answers frequently asked questions about products, services, and policies.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>35 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>8 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>210 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 1 week ago</span>
+                        <span>Last trained: 2 days ago</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 4 -->
+            <div id="agent-card-4" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-phone-alt text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Voice Assistant</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Ready</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Handles voice interactions for customer support and appointment scheduling.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>38 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>14 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>256 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 3 days ago</span>
+                        <span>Last trained: Yesterday</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 5 -->
+            <div id="agent-card-5" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-calendar-alt text-red-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Booking Agent</h3>
+                                <span class="text-xs text-gray-500">Urdu</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full font-medium">Archived</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Manages appointment scheduling and calendar management for services.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>24 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>10 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>142 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 2 months ago</span>
+                        <span>Last trained: 2 months ago</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 6 -->
+            <div id="agent-card-6" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-chart-line text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Analytics Assistant</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">Training</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Helps users interpret data and generate reports from analytics platforms.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>32 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>16 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>178 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 12 hours ago</span>
+                        <span>Training: 72%</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 7 -->
+            <div id="agent-card-7" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-heart text-pink-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Healthcare Bot</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Ready</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Provides health information and symptom checking for patients.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>48 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>22 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>394 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 5 days ago</span>
+                        <span>Last trained: 3 days ago</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Card 8 -->
+            <div id="agent-card-8" class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-graduation-cap text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Educational Tutor</h3>
+                                <span class="text-xs text-gray-500">English</span>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Ready</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">Assists students with learning materials and answers educational questions.</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-brain mr-1"></i>
+                            <span>52 Intents</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-tag mr-1"></i>
+                            <span>18 Entities</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <i class="fa-solid fa-comment mr-1"></i>
+                            <span>420 Phrases</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-xs text-gray-500">
+                        <span>Last updated: 1 day ago</span>
+                        <span>Last trained: 1 day ago</span>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
+                    <button class="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center">
+                        <i class="fa-solid fa-external-link-alt mr-1.5"></i>
+                        Open
+                    </button>
+                    <div class="relative">
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fa-solid fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Agent Modal -->
+    <div id="create-agent-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Create New Agent</h3>
+                    <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Agent Name*</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Enter agent name">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
+                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500" rows="3" placeholder="Describe what this agent will do"></textarea>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Language (optional)</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <option value="en">English</option>
+                        <option value="ur">Urdu</option>
+                        <option value="ar">Arabic</option>
+                        <option value="fr">French</option>
+                        <option value="es">Spanish</option>
+                    </select>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Domain or Use Case (optional)</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <option value="">Select domain</option>
+                        <option value="support">Customer Support</option>
+                        <option value="sales">Sales</option>
+                        <option value="faq">FAQ Bot</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button id="cancel-create" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                        Create Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu for Agent Actions -->
+    <div id="agent-context-menu" class="hidden absolute bg-white shadow-lg rounded-md overflow-hidden border border-gray-200 z-20 w-48">
+        <ul class="py-1">
+            <li>
+                <span class="px-4 py-2 hover:bg-gray-100 flex items-center text-sm text-gray-700 cursor-pointer">
+                    <i class="fa-solid fa-edit w-5"></i>
+                    Rename
+                </span>
+            </li>
+            <li>
+                <span class="px-4 py-2 hover:bg-gray-100 flex items-center text-sm text-gray-700 cursor-pointer">
+                    <i class="fa-solid fa-copy w-5"></i>
+                    Duplicate Agent
+                </span>
+            </li>
+            <li>
+                <span class="px-4 py-2 hover:bg-gray-100 flex items-center text-sm text-gray-700 cursor-pointer">
+                    <i class="fa-solid fa-sync w-5"></i>
+                    Train Now
+                </span>
+            </li>
+            <li>
+                <span class="px-4 py-2 hover:bg-gray-100 flex items-center text-sm text-gray-700 cursor-pointer">
+                    <i class="fa-solid fa-download w-5"></i>
+                    Export Agent
+                </span>
+            </li>
+            <li class="border-t border-gray-200">
+                <span class="px-4 py-2 hover:bg-gray-100 flex items-center text-sm text-red-600 cursor-pointer">
+                    <i class="fa-solid fa-trash w-5"></i>
+                    Delete
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex items-start mb-4">
+                    <div class="bg-red-100 p-2 rounded-full mr-4">
+                        <i class="fa-solid fa-exclamation-circle text-red-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium">Delete AI Agent</h3>
+                        <p class="text-gray-600 mt-1">Are you sure you want to delete this agent? This action cannot be undone and all training data will be permanently lost.</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-3 mt-6">
+                    <button class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                        Delete Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcut Modal -->
+    <div id="keyboard-shortcuts-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Keyboard Shortcuts</h3>
+                    <button class="text-gray-400 hover:text-gray-600">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-700">Search agents</span>
+                        <div class="flex items-center">
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">⌘</span>
+                            <span class="mx-1 text-gray-500">+</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">K</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-700">Create new agent</span>
+                        <div class="flex items-center">
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">⌘</span>
+                            <span class="mx-1 text-gray-500">+</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">N</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-700">Toggle view</span>
+                        <div class="flex items-center">
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">⌘</span>
+                            <span class="mx-1 text-gray-500">+</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">V</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-700">Refresh list</span>
+                        <div class="flex items-center">
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">⌘</span>
+                            <span class="mx-1 text-gray-500">+</span>
+                            <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-mono">R</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Permissions Note -->
+    <div id="permissions-note" class="fixed bottom-0 right-0 m-6 max-w-xs bg-white rounded-lg shadow-lg border border-gray-200 p-4 z-10">
+        <div class="flex items-start">
+            <i class="fa-solid fa-lock text-gray-500 mt-1 mr-3"></i>
+            <div>
+                <h4 class="font-medium text-gray-800 mb-1">Permissions Note</h4>
+                <p class="text-sm text-gray-600">Some actions may be restricted based on your role. Contact your administrator for more access.</p>
+                <button class="text-primary-600 text-sm mt-2">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show/Hide Create Agent Modal
+        document.getElementById('create-agent-btn').addEventListener('click', function() {
+            document.getElementById('create-agent-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('create-agent-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('cancel-create').addEventListener('click', function() {
+            document.getElementById('create-agent-modal').classList.add('hidden');
+        });
+        
+        // Context menu for ellipsis buttons
+        const ellipsisButtons = document.querySelectorAll('.fa-ellipsis-v');
+        const contextMenu = document.getElementById('agent-context-menu');
+        
+        ellipsisButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Position the context menu
+                const rect = this.getBoundingClientRect();
+                contextMenu.style.top = `${rect.bottom + window.scrollY}px`;
+                contextMenu.style.left = `${rect.left + window.scrollX - 120}px`;
+                
+                // Show the context menu
+                contextMenu.classList.remove('hidden');
+            });
+        });
+        
+        // Hide context menu when clicking elsewhere
+        document.addEventListener('click', function() {
+            contextMenu.classList.add('hidden');
+        });
+        
+        // Dismiss permissions note
+        document.querySelector('#permissions-note button').addEventListener('click', function() {
+            document.getElementById('permissions-note').classList.add('hidden');
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Command/Ctrl + K for search
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
+            
+            // Command/Ctrl + N for new agent
+            if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+                e.preventDefault();
+                document.getElementById('create-agent-modal').classList.remove('hidden');
+            }
+        });
+    </script>
+
+</body></html>
