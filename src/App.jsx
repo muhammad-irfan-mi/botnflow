@@ -67,6 +67,7 @@ import { useState, useEffect } from 'react';
 import Footer from './component/global/Footer';
 import { ReactFlowProvider } from '@xyflow/react';
 
+
 function AppContent() {
   const location = useLocation();
   const [showSidebar, setShowSidebar] = useState(true);
@@ -99,7 +100,7 @@ function AppContent() {
     } else {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -111,16 +112,16 @@ function AppContent() {
     <>
       {/* Full screen overlay that covers everything including header */}
       {(screenSize === 'mobile' || screenSize === 'small-laptop') && showSidebar && (
-        <div 
+        <div
           className="fixed inset-0 z-30 bg-gray-200 opacity-50"
           onClick={() => setShowSidebar(false)}
         />
       )}
-      
+
       <div className='h-1'>
         {!isAuthPage && (
-          <Header 
-            onToggleSidebar={() => setShowSidebar(!showSidebar)} 
+          <Header
+            onToggleSidebar={() => setShowSidebar(!showSidebar)}
             showSidebarButton={screenSize !== 'desktop'}
             isSidebarOpen={showSidebar && (screenSize === 'mobile' || screenSize === 'small-laptop')}
           />
@@ -129,15 +130,15 @@ function AppContent() {
           {!isAuthPage && (
             <div
               className={`
-                ${screenSize === 'mobile' || screenSize === 'small-laptop' ? 
+                ${screenSize === 'mobile' || screenSize === 'small-laptop' ?
                   `fixed top-0 left-0 z-40 h-full w-64 transform ${showSidebar ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out` :
                   `transition-all duration-300 ease-in-out ${showSidebar ? 'w-64' : 'w-0 overflow-hidden'} fixed h-[90vh] top-16`
                 } 
                 flex-shrink-0 bg-primary-600 shadow-xl
               `}
             >
-              <Sidebar 
-                onClose={() => (screenSize === 'mobile' || screenSize === 'small-laptop') && setShowSidebar(false)} 
+              <Sidebar
+                onClose={() => (screenSize === 'mobile' || screenSize === 'small-laptop') && setShowSidebar(false)}
                 isCompact={screenSize === 'small-laptop'}
               />
             </div>
@@ -145,7 +146,7 @@ function AppContent() {
 
           <div className={`
             flex-1 pb-12 transition-all duration-300 ease-in-out 
-            ${isAuthPage ? 'ml-0' : 
+            ${isAuthPage ? 'ml-0' :
               showSidebar && screenSize === 'desktop' ? 'ml-64' : 'ml-0'
             } 
             min-h-[calc(100vh-4rem)]

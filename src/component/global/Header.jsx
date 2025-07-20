@@ -62,6 +62,16 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
     }
   };
 
+  const handleProfile = () => {
+    setDropdown('');
+    navigate('/setting')
+  }
+  const handleAPICredential = () => {
+    setDropdown('');
+    navigate('/api-credential')
+  }
+
+
   const statuses = {
     online: 'bg-green-500',
     busy: 'bg-yellow-500',
@@ -242,14 +252,14 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
       <div className="flex items-center justify-between px-2 sm:px-4 h-full">
         {/* Left Side */}
         <div className="flex items-center">
-          {showSidebarButton && (
-            <button
-              className="p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none"
-              onClick={onToggleSidebar}
-            >
-              <MenuIcon fontSize="medium" />
-            </button>
-          )}
+          {/* {showSidebarButton && ( */}
+          <button
+            className="p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none"
+            onClick={onToggleSidebar}
+          >
+            <MenuIcon fontSize="medium" />
+          </button>
+          {/* )} */}
           <span className="ml-2 sm:ml-3 flex items-center cursor-pointer">
             <img
               src={logo}
@@ -382,15 +392,22 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
             {dropdown === 'user' && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200">
                 <div className="px-4 py-3 border-b border-gray-200">
-                  <p className="text-sm font-medium">John Doe</p>
+                  <div className='flex items-center gap-3'>
+                    <img
+                      src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                      alt="User avatar"
+                      className="h-8 w-8 rounded-full object-cover"
+                    />
+                    <p className="text-sm font-medium">John Doe</p>
+                  </div>
                   <p className="text-xs text-gray-500 mt-1">john.doe@example.com</p>
                   <p className="text-xs text-gray-500 mt-1">Master Admin</p>
                 </div>
-                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={handleProfile}>
                   <PersonOutline className="mr-2 w-5" fontSize="small" />
                   Profile & Settings
                 </span>
-                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={handleAPICredential}>
                   <VpnKey className="mr-2 w-5" fontSize="small" />
                   API Credentials
                 </span>

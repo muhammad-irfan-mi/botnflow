@@ -166,11 +166,11 @@ import { ContentContext } from '../../context/ContextProvider';
 const navItems = [
     { label: 'Dashboard', icon: FaChartLine, path: '/dashboard' },
     { label: 'Conversation', icon: ForumIcon, path: '/conversation' },
+    { label: 'Lead Generation', icon: ForumIcon, path: '/lead-generation' },
     { label: 'Contacts', icon: FaAddressBook, path: '/contact' },
     { label: 'Broadcast', icon: FaBullhorn, path: '/broadcast' },
     { label: 'Flow Builder', icon: SchemaIcon, path: '/flow-builder' },
     { label: 'AI Agent', icon: SupportAgentIcon, path: '/aiagent-list' },
-    { label: 'Report & Analytics', icon: AnalyticsIcon, path: '/report' },
     { label: 'Settings', icon: SettingsIcon, path: '/setting' },
     {
         label: 'Call Center',

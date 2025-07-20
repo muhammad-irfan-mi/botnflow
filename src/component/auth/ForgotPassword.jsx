@@ -55,7 +55,7 @@ const ForgotPassword = () => {
                     <div className="mt-8 text-center">
                         <p className="text-sm text-gray-600">
                             Don't have an account?
-                            <Link to='/signup' className='font-medium text-primary-600 cursor-pointer'>
+                            <Link to='/signup' className='ml-1 font-medium text-primary-600 cursor-pointer'>
                                 Signup for Account!
                             </Link>
                         </p>

@@ -20,6 +20,8 @@ import DashboardList from '../pages/dashboard/DashboardList';
 import Flow from '../pages/ReactFlow/Flow';
 import BroadCast from '../pages/broadcast/BroadCast';
 import AiAgentList from '../pages/aiAgent/AiAgentList';
+import APICredential from '../pages/apiCredential/APICredential';
+import LeadGeneration from '../pages/leadgeneration/LeadGeneration';
 
 
 function AppRoute() {
@@ -35,6 +37,7 @@ function AppRoute() {
         <Route path="/dashboard" element={<DashboardList />} />
         <Route path="/contact" element={<Contacts />} />
         <Route path="/conversation" element={<Conversation />} />
+        <Route path="/lead-generation" element={<LeadGeneration />} />
         <Route path="/aiagent-list" element={<AiAgentList />} />
         <Route path="/ai-agent" element={<AIAgent />} />
         <Route path="/broadcast" element={<BroadCast />} />
@@ -47,6 +50,7 @@ function AppRoute() {
         <Route path="/call-logs" element={<CallLogs />} />
         <Route path="/call-queue" element={<CallQueue />} />
         <Route path="/setting" element={<Settings />} />
+        <Route path="/api-credential" element={<APICredential />} />
       </Routes>
   );
 }
