@@ -53,7 +53,7 @@ const AgentDashBoard = () => {
             {/* Main Content */}
             <main className="flex-1 overflow-auto">
                 <header className="bg-white border-b border-gray-200 p-3">
-                    <div className="flex items-center justify-between">
+                    <div className="md:flex items-center justify-between">
                         <div>
                             <h1 className="text-2xl font-bold text-gray-900">Agent Dashboard</h1>
                             <p className="text-gray-500">Welcome back, John! Here's your call center overview.</p>
@@ -64,17 +64,16 @@ const AgentDashBoard = () => {
                                 <select
                                     value={status}
                                     onChange={handleStatusChange}
-                                    className={`appearance-none ${status === 'Available' ? 'bg-green-400' : status === 'Busy' ? 'bg-yellow-400' : 'bg-gray-400'} text-white px-4 py-2 rounded-lg font-medium pr-8 cursor-pointer`}
+                                    className={`${status === 'Available' ? 'bg-green-400' : status === 'Busy' ? 'bg-yellow-400' : 'bg-gray-400'} text-white px-4 py-2 rounded-lg font-medium pr-8 cursor-pointer`}
                                 >
                                     <option value="Available">Available</option>
                                     <option value="Busy">Busy</option>
                                     <option value="Offline">Offline</option>
                                 </select>
-                                <KeyboardArrowDownIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white text-xs" />
                             </div>
-                            <div className="flex items-center space-x-2">
+                            <div className="flex items-center md:space-x-2">
                                 <div className={`w-3 h-3 rounded-full animate-pulse ${status === 'Available' ? 'bg-success' : status === 'Busy' ? 'bg-warning' : 'bg-gray-400'}`}></div>
-                                <span className="text-sm font-medium text-gray-700">
+                                <span className="hidden md:inline text-sm font-medium text-gray-700">
                                     {status === 'Available' ? 'Online' : status === 'Busy' ? 'Busy' : 'Offline'}
                                 </span>
                             </div>
@@ -153,10 +152,10 @@ const AgentDashBoard = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {/* Active Calls Widget */}
                         <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <div className="p-6 border-b border-gray-200">
-                                <div className="flex items-center justify-between">
+                            <div className="p-3 md:p-6 border-b border-gray-200">
+                                <div className="flex sm:flex gap-2 items-center justify-between">
                                     <h2 className="text-xl font-bold text-gray-900">Active Calls</h2>
-                                    <button className="bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                                    <button className="bg-primary-600 text-white md:px-4 px-1 py-2 rounded-lg font-medium transition-colors">
                                         <Phone className="mr-2" /> Start Dialer
                                     </button>
                                 </div>
@@ -164,7 +163,7 @@ const AgentDashBoard = () => {
 
                             <div className="p-6">
                                 <div className="space-y-4">
-                                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div className="md:flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div className="flex items-center space-x-4">
                                             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                                                 <Person className="text-blue-600" />
@@ -174,8 +173,8 @@ const AgentDashBoard = () => {
                                                 <p className="text-sm text-gray-500">+1 (555) 123-4567</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center space-x-4">
-                                            <div className="text-right">
+                                        <div className="flex items-center ml-3 md:ml-0 space-x-4 mt-3 md:mt-0">
+                                            <div className="text-start md:text-right">
                                                 <p className="text-sm font-medium text-gray-900">
                                                     {formatTime(callTime.minutes, callTime.seconds)}
                                                 </p>
@@ -192,7 +191,7 @@ const AgentDashBoard = () => {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
+                                    <div className="md:flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
                                         <div className="flex items-center space-x-4">
                                             <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
                                                 <Person className="text-yellow-600" />
@@ -202,8 +201,8 @@ const AgentDashBoard = () => {
                                                 <p className="text-sm text-gray-500">{queuedCall.number}</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center space-x-4">
-                                            <div className="text-right">
+                                        <div className="flex items-center space-x-4 mt-3 md:mt-0">
+                                            <div className="text-start ml-3 md:ml-0 md:text-right">
                                                 <p className="text-sm font-medium text-gray-900">Waiting</p>
                                                 <p className="text-xs text-gray-500">Queue #{queuedCall.position}</p>
                                             </div>

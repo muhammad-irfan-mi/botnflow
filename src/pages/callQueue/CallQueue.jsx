@@ -224,9 +224,9 @@ const CallQueue = () => {
 
           {/* Queue Controls */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <div className="md:flex items-center justify-between">
+              <div className="md:flex items-center space-x-4">
+                <button className="w-full md:w-70 flex px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                   <PlayArrowIcon className="mr-2" />
                   Auto-Refresh
                 </button>
@@ -251,7 +251,7 @@ const CallQueue = () => {
               <h3 className="text-lg font-semibold text-gray-900">Callers in Queue</h3>
             </div>
             
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto w-[295px] md:w-[740px] lg:w-auto">
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
