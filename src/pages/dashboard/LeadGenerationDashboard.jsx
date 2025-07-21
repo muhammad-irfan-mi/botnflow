@@ -11,7 +11,7 @@ import {
 
 const LeadGenerationDashboard = () => {
   return (
-    <div className="bg-gray-50 font-sans">
+    <div className="bg-gray-50 font-sans pb-6">
 
       {/* <main className="pt-16 pb-6"> */}
         <div className="max-w-7xl mx-auto px-3">

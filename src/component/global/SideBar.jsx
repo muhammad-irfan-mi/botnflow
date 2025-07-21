@@ -218,7 +218,7 @@ const navItemsAdmin = [
     },
 ]
 
-const Sidebar = ({ onClose, isCompact }) => {
+const Sidebar = ({ onClose, isCompact, showSidebar }) => {
     const [openSubmenu, setOpenSubmenu] = useState(null);
     const { role } = useContext(ContentContext);
 
@@ -251,7 +251,11 @@ const Sidebar = ({ onClose, isCompact }) => {
                                     onClick={onClose}
                                 >
                                     <item.icon className="text-gray-200" />
-                                    <span>{item.label}</span>
+                                    <span
+                                        className={`transition-all duration-300 ${showSidebar ? 'opacity-100 max-w-[200px] ml-1' : 'opacity-0 max-w-0 ml-0'} whitespace-nowrap text-gray-200`}
+                                    >
+                                        {item.label}
+                                    </span>
                                 </NavLink>
                             ) : (
                                 <div>
@@ -262,13 +266,22 @@ const Sidebar = ({ onClose, isCompact }) => {
                                     >
                                         <div className="flex items-center space-x-3">
                                             <item.icon className="text-gray-200" />
-                                            <span>{item.label}</span>
+                                            {/* {showSidebar && <span>{item.label}</span>} */}
+                                            <span
+                                                className={`transition-all duration-300 ${showSidebar ? 'opacity-100 max-w-[200px] ml-1' : 'opacity-0 max-w-0 ml-0'} whitespace-nowrap text-gray-200`}
+                                            >
+                                                {item.label}
+                                            </span>
                                         </div>
-                                        {openSubmenu === item.label ? (
-                                            <KeyboardArrowUpIcon className="text-gray-200" />
-                                        ) : (
-                                            <KeyboardArrowDownIcon className="text-gray-200" />
+
+                                        {showSidebar && (
+                                            openSubmenu === item.label ? (
+                                                <KeyboardArrowUpIcon className="text-gray-200" />
+                                            ) : (
+                                                <KeyboardArrowDownIcon className="text-gray-200" />
+                                            )
                                         )}
+
                                     </div>
                                     {openSubmenu === item.label && (
                                         <ul className="ml-6 mt-1 space-y-1">
@@ -277,11 +290,11 @@ const Sidebar = ({ onClose, isCompact }) => {
                                                     <NavLink
                                                         to={subItem.path}
                                                         className={({ isActive }) =>
-                                                            `flex items-center space-x-3 px-3 py-2 rounded-lg cursor-pointer ${isActive ? 'bg-blue-900 text-white' : 'hover:bg-blue-900'
+                                                            `${!showSidebar ? 'hidden' : ''} flex items-center space-x-3 px-3 py-2 rounded-lg cursor-pointer ${isActive ? 'bg-blue-900 text-white' : 'hover:bg-blue-900'
                                                             }`}
                                                         onClick={onClose}
                                                     >
-                                                        <span>{subItem.label}</span>
+                                                        <span >{subItem.label}</span>
                                                     </NavLink>
                                                 </li>
                                             ))}

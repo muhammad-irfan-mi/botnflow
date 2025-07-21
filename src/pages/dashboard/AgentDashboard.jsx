@@ -208,11 +208,11 @@ const AgentDashboard = () => {
   ];
 
   return (
-    <div className="bg-gray-100 font-sans">
-      {/* Main Content */}
-      <div id="main-content" className="p-3">
+    <div className="bg-gray-50 font-sans pb-6">
+      {/* <main className="pt-16 pb-6"> */}
+      <div className="max-w-7xl mx-auto px-3">
         {/* Filter Bar */}
-        <div id="filter-bar" className="bg-white p-4 rounded-lg shadow-sm mb-6 md:flex justify-between items-center">
+        <div id="filter-bar" className="bg-white mt-3 p-4 rounded-lg shadow-sm mb-6 md:flex justify-between items-center">
           <div className="flex justify-between space-x-3">
             <div className="relative">
               <select className="bg-gray-50 border border-gray-300 text-gray-700 px-3 py-2 pr-8 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500">
@@ -771,7 +771,7 @@ const AgentDashboard = () => {
         </div>
 
         {/* Real-time Agent Activity */}
-        <div id="realtime-activity" className="bg-white rounded-lg shadow-sm mb-6">
+        <div id="realtime-activity" className="bg-white rounded-lg shadow-sm ">
           <div className="p-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-800">Real-time Agent Activity</h2>
           </div>

@@ -572,7 +572,7 @@ const CampaignDashboard = () => {
           </div>
 
           {/* Channel-wise Campaign Summary */}
-          <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+          <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-3">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Channel Performance</h3>
               <button className="text-xs text-indigo-600 font-medium">View Detailed Report</button>
@@ -686,7 +686,7 @@ const CampaignDashboard = () => {
           </div>
 
           {/* Campaign List & Stats */}
-          {/* <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+          <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-3">
             <div className="md:flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign List</h3>
               <div className="flex items-center space-x-3">
@@ -728,7 +728,7 @@ const CampaignDashboard = () => {
                     <tr key={idx}>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex items-center">
-                          <span className={`w-2 h-2 ${campaign.statusColor} rounded-full mr-2`}></span>
+                          <span className={`w-2 h-2 ${campaign.statusColor} rounded-full `}></span>
                           <span className="font-medium text-sm">{campaign.name}</span>
                         </div>
                       </td>
@@ -779,7 +779,7 @@ const CampaignDashboard = () => {
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">Next</button>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

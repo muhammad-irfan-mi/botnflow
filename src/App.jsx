@@ -132,7 +132,7 @@ function AppContent() {
               className={`
                 ${screenSize === 'mobile' || screenSize === 'small-laptop' ?
                   `fixed top-0 left-0 z-40 h-full w-64 transform ${showSidebar ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out` :
-                  `transition-all duration-300 ease-in-out ${showSidebar ? 'w-64' : 'w-0 overflow-hidden'} fixed h-[90vh] top-16`
+                  `transition-all duration-300 ease-in-out ${showSidebar ? 'w-64' : 'z-[99] w-14 overflow-hidden'} fixed h-[90vh] top-16`
                 } 
                 flex-shrink-0 bg-primary-600 shadow-xl
               `}
@@ -140,21 +140,23 @@ function AppContent() {
               <Sidebar
                 onClose={() => (screenSize === 'mobile' || screenSize === 'small-laptop') && setShowSidebar(false)}
                 isCompact={screenSize === 'small-laptop'}
+                showSidebar={showSidebar}
               />
             </div>
           )}
 
           <div className={`
-            flex-1 pb-12 transition-all duration-300 ease-in-out 
-            ${isAuthPage ? 'ml-0' :
-              showSidebar && screenSize === 'desktop' ? 'ml-64' : 'ml-0'
-            } 
+            flex-1  transition-all duration-300 ease-in-out 
+           ${isAuthPage ? 'ml-0' :
+              screenSize === 'desktop' ? (showSidebar ? 'ml-64 pb-12' : 'ml-14 pb-12') : 'ml-0 pb-12'
+            }
+
             min-h-[calc(100vh-4rem)]
           `}>
             <AppRoute />
             <div className={`
               md:fixed top-[90%] md:top-[92%] 
-              ${showSidebar && screenSize === 'desktop' ? 'w-[calc(100%-16rem)]' : 'w-full'}
+              ${showSidebar && screenSize === 'desktop' ? 'w-[calc(100%-16rem)]' : 'w-[95%]'}
             `}>
               {!isAuthPage && <Footer />}
             </div>

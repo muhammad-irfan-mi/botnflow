@@ -318,41 +318,41 @@ const LeadGeneration = () => {
 
                 {/* Quick Search Categories */}
                 {/* <div id="quick-categories" className="px-6 mt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-800">Popular Categories</h3>
-            <div className="flex items-center space-x-2">
-              <button 
-                onClick={() => scrollCategories('left')} 
-                className="p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50"
-              >
-                <ChevronLeft className="text-gray-600" />
-              </button>
-              <button 
-                onClick={() => scrollCategories('right')} 
-                className="p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50"
-              >
-                <ChevronRight className="text-gray-600" />
-              </button>
-            </div>
-          </div>
-          <div id="categories-container" className="overflow-x-auto scrollbar-hide">
-            <div className="flex space-x-4 pb-4 min-w-max">
-              {popularCategories.map((category) => (
-                <div 
-                  key={category.id}
-                  onClick={() => selectCategory(category.id)}
-                  className="flex-shrink-0 bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md hover:border-primary-300 transition-all cursor-pointer category-card w-32"
-                >
-                  <div className={`w-12 h-12 ${category.color} rounded-lg flex items-center justify-center mb-3`}>
-                    <span className={`${category.textColor} text-xl`}>{category.icon}</span>
-                  </div>
-                  <h4 className="font-medium text-gray-800 text-sm">{category.name}</h4>
-                  <p className="text-xs text-gray-500 mt-1">{category.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-semibold text-gray-800">Popular Categories</h3>
+                        <div className="flex items-center space-x-2">
+                            <button
+                                onClick={() => scrollCategories('left')}
+                                className="p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50"
+                            >
+                                <ChevronLeft className="text-gray-600" />
+                            </button>
+                            <button
+                                onClick={() => scrollCategories('right')}
+                                className="p-2 rounded-full bg-white shadow-sm border border-gray-200 hover:bg-gray-50"
+                            >
+                                <ChevronRight className="text-gray-600" />
+                            </button>
+                        </div>
+                    </div>
+                    <div id="categories-container" className="overflow-x-auto scrollbar-hide">
+                        <div className="flex space-x-4 pb-4 min-w-max">
+                            {popularCategories.map((category) => (
+                                <div
+                                    key={category.id}
+                                    onClick={() => selectCategory(category.id)}
+                                    className="flex-shrink-0 bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md hover:border-primary-300 transition-all cursor-pointer category-card w-32"
+                                >
+                                    <div className={`w-12 h-12 ${category.color} rounded-lg flex items-center justify-center mb-3`}>
+                                        <span className={`${category.textColor} text-xl`}>{category.icon}</span>
+                                    </div>
+                                    <h4 className="font-medium text-gray-800 text-sm">{category.name}</h4>
+                                    <p className="text-xs text-gray-500 mt-1">{category.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div> */}
 
                 {/* Progress Bar (initially hidden) */}
                 {searchProgress && (
@@ -395,6 +395,7 @@ const LeadGeneration = () => {
                                 <h3 className="text-lg font-semibold text-gray-800">Search Results</h3>
                                 <span className="ml-3 px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full">1,247 businesses found</span>
                             </div>
+                            
                             <div className="md:flex justify-between items-center space-x-3 mt-3 lg:mt-0">
                                 <div className='flex justify-between mt-3 md:mt-0'>
                                     <button
@@ -405,7 +406,7 @@ const LeadGeneration = () => {
                                         Filter
                                     </button>
                                     <button
-                                        onClick={() => {/* Implement sort functionality */ }}
+                                        onClick={() => console.log('Sort')}
                                         className="flex items-center px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded"
                                     >
                                         <Sort className="mr-1.5" />
@@ -421,7 +422,7 @@ const LeadGeneration = () => {
                                         Export All
                                     </button>
                                     <button
-                                        onClick={() => {/* Implement save all functionality */ }}
+                                        onClick={() => console.log("Save All")}
                                         className="flex items-center px-3 py-1.5 text-sm bg-primary-600 text-white hover:bg-primary-700 rounded"
                                     >
                                         <Save className="mr-1.5" />
@@ -433,7 +434,7 @@ const LeadGeneration = () => {
 
                         <div className="divide-y divide-gray-200">
                             {searchResults.map((business) => (
-                                <div key={business.id} className="p-6 hover:bg-gray-50 transition-colors">
+                                <div key={business.id} className="p-3 hover:bg-gray-50 transition-colors">
                                     <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                                         <div className="flex-shrink-0">
                                             <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">

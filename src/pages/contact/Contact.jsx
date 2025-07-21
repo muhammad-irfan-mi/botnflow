@@ -29,7 +29,7 @@ const Contacts = () => {
                 <p className="text-gray-600">Manage your contact groups and individual contacts</p>
             </div>
 
-            <div className="lg:flex gap-6">
+            <div className="lg:flex gap-6 py-3 pb-6 w-[97%] mx-auto">
                 <div className="flex-1">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                         <div className="p-4 border-b border-gray-200">
@@ -76,7 +76,7 @@ const Contacts = () => {
                 </div>
 
                 {/* Contact Table */}
-                <div className="md:flex-3 flex-2">
+                <div className="md:flex-3 flex-2 mt-3">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
                         {/* Controls */}
                         <div className="md:flex items-center justify-between mb-4">
