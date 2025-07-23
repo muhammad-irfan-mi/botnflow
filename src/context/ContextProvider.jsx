@@ -1,12 +1,19 @@
 import { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
+import logo from '../assets/images/logo.png'
 
 export const ContentContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [nodeContents, setNodeContents] = useState({});
   const [currentFlowId, setCurrentFlowId] = useState(null);
-  const [role , setRole] = useState('');
+  const [role, setRole] = useState('');
+  const [logoImage, setLogoImage] = useState(logo)
+  const [themeColor, setThemeColor] = useState('#0076cb');
+  const [secondaryThemeColor, setSecondaryThemeColor] = useState('#1e3a8a');
+  console.log('themeColor', themeColor)
+  console.log('secondaryThemeColor', secondaryThemeColor)
+  const [customizationModal, setCustomizationModal] = useState(false);
 
   const saveContentToServer = useCallback(async (nodeId, content) => {
     if (!currentFlowId) return;
@@ -58,7 +65,15 @@ export const ContextProvider = ({ children }) => {
       setCurrentFlowId,
       nodeContents,
       role,
-      setRole
+      setRole,
+      logoImage,
+      setLogoImage,
+      themeColor,
+      setThemeColor,
+      secondaryThemeColor,
+      setSecondaryThemeColor,
+      customizationModal,
+      setCustomizationModal
     }}>
       {children}
     </ContentContext.Provider>

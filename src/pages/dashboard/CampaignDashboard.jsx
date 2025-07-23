@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import {
@@ -24,8 +24,10 @@ import {
   CheckCircle
 } from '@mui/icons-material';
 import { WhatsApp } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const CampaignDashboard = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
   // Campaign Performance Chart options
   const campaignChartOptions = {
     chart: {
@@ -239,11 +241,11 @@ const CampaignDashboard = () => {
               </div>
             </div>
             <div id="quick-actions" className="md:flex justify-between space-x-2 space-y-3 md:space-y-0">
-              <button className="bg-indigo-600 text-white w-full md:w-fit px-4 py-2 rounded-md text-sm font-medium flex items-center">
+              <button style={{ backgroundColor: themeColor }} className=" text-white w-full md:w-fit px-4 py-2 rounded-md text-sm font-medium flex items-center">
                 <Add className="mr-2" style={{ fontSize: '1rem' }} />
                 Create Campaign
               </button>
-              <div className='flex justify-between'>
+              <div className='flex justify-between gap-2'>
                 <button className="border border-gray-300 bg-white text-gray-700 px-4 py-2 rounded-md text-sm font-medium flex items-center">
                   <Download className="mr-2" style={{ fontSize: '1rem' }} />
                   Export Report
@@ -573,9 +575,20 @@ const CampaignDashboard = () => {
 
           {/* Channel-wise Campaign Summary */}
           <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-3">
-            <div className="flex justify-between items-center mb-4">
+            {/* <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Channel Performance</h3>
               <button className="text-xs text-indigo-600 font-medium">View Detailed Report</button>
+            </div> */}
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-medium">Channel Performance</h3>
+              <button
+                className="text-xs cursor-pointer transition-colors duration-200"
+                style={{ color: themeColor }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = secondaryThemeColor)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = themeColor)}
+              >
+                View Detailed Report
+              </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="border border-gray-200 rounded-md p-3">
@@ -773,7 +786,7 @@ const CampaignDashboard = () => {
               <div className="text-sm text-gray-500">Showing 5 of 16 campaigns</div>
               <div className="flex space-x-1 mt-2 md:mt-0">
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">Previous</button>
-                <button className="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm">1</button>
+                <button style={{ backgroundColor: themeColor }} className="px-3 py-1 text-white rounded-md text-sm">1</button>
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">2</button>
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">3</button>
                 <button className="px-3 py-1 border border-gray-300 rounded-md text-sm">Next</button>

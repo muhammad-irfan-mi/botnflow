@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
     Add,
     Search,
@@ -16,8 +16,10 @@ import {
     Download,
 } from "@mui/icons-material";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import { ContentContext } from "../../context/ContextProvider";
 
 const Contacts = () => {
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -35,9 +37,19 @@ const Contacts = () => {
                         <div className="p-4 border-b border-gray-200">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-lg font-semibold text-gray-900">Groups</h2>
-                                <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 flex items-center gap-1">
+                                <button
+                                    className="px-3 py-2 text-white text-sm rounded-lg flex items-center gap-1"
+                                    style={{ backgroundColor: themeColor }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor = themeColor;
+                                    }}
+                                >
                                     <Add fontSize="small" /> New
                                 </button>
+
                             </div>
                             <div className="relative">
                                 <input
@@ -59,8 +71,21 @@ const Contacts = () => {
                             ].map((group, index) => (
                                 <div
                                     key={index}
-                                    className={`group-item rounded-lg p-3 cursor-pointer flex justify-between items-center ${index === 0 ? `${group.bg} ${group.text} hover:bg-blue-700` : "text-gray-900 hover:bg-gray-50"
-                                        }`}
+                                    className={`group-item rounded-lg p-3 cursor-pointer flex justify-between items-center ${index !== 0 ? "text-gray-900 hover:bg-gray-50" : ""}`}
+                                    style={
+                                        index === 0
+                                            ? {
+                                                backgroundColor: themeColor,
+                                                color: "#fff",
+                                            }
+                                            : {}
+                                    }
+                                    onMouseEnter={(e) => {
+                                        if (index === 0) e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        if (index === 0) e.currentTarget.style.backgroundColor = themeColor;
+                                    }}
                                 >
                                     <div>
                                         <h3 className={`font-medium ${group.text}`}>{group.name}</h3>
@@ -76,7 +101,7 @@ const Contacts = () => {
                 </div>
 
                 {/* Contact Table */}
-                <div className="md:flex-3 flex-2 mt-3">
+                <div className="md:flex-3 flex-2 mt-3 md:mt-0">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
                         {/* Controls */}
                         <div className="md:flex items-center justify-between mb-4">
@@ -106,7 +131,14 @@ const Contacts = () => {
                                 </div>
                                 <button
                                     onClick={toggleModal}
-                                    className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-1 mt-3 md:mt-0"
+                                    className="px-3 py-2 text-white rounded-lg flex items-center gap-1 mt-3 md:mt-0"
+                                    style={{ backgroundColor: themeColor }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor = themeColor;
+                                    }}
                                 >
                                     <Add fontSize="small" /> Add Contact
                                 </button>
@@ -175,7 +207,7 @@ const Contacts = () => {
                             </div>
                             <div className="flex space-x-2 mt-2 md:mt-0">
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
-                                <button className="px-3 py-1 bg-primary-600 text-white rounded text-sm">1</button>
+                                <button style={{backgroundColor: themeColor}} className="px-3 py-1 text-white rounded text-sm">1</button>
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">3</button>
                                 <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>

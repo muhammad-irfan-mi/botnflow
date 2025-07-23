@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ArrowBack,
   ArrowForward,
@@ -18,8 +18,10 @@ import {
   Check,
 } from '@mui/icons-material';
 import { WhatsApp, Phone } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const CreateBroadcast = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
   const [selectedChannel, setSelectedChannel] = useState('whatsapp');
   const [whatsappOption, setWhatsappOption] = useState('template');
   const [selectedTemplate, setSelectedTemplate] = useState('');
@@ -98,24 +100,37 @@ const CreateBroadcast = () => {
                 {steps.map((step, index) => (
                   <div key={step.id} className="flex items-center">
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${currentStep >= index + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${currentStep >= index + 1 ? 'text-white' : 'bg-gray-200 text-gray-600'
                         }`}
+                      style={
+                        currentStep >= index + 1
+                          ? { backgroundColor: themeColor }
+                          : {}
+                      }
                     >
                       <span>{index + 1}</span>
                     </div>
                     <span
-                      className={`ml-2 text-sm font-medium ${currentStep >= index + 1 ? 'text-blue-600' : 'text-gray-500'
+                      className={`ml-2 text-sm font-medium ${currentStep >= index + 1 ? '' : 'text-gray-500'
                         }`}
+                      style={
+                        currentStep >= index + 1
+                          ? { color: themeColor }
+                          : {}
+                      }
                     >
                       {step.name}
                     </span>
                     {index < steps.length - 1 && (
                       <div
-                        className={`w-16 h-0.5 mx-4 ${currentStep > index + 1 ? 'bg-blue-600' : 'bg-gray-200'
-                          }`}
+                        className="w-16 h-0.5 mx-4"
+                        style={{
+                          backgroundColor: currentStep > index + 1 ? themeColor : '#E5E7EB',
+                        }}
                       ></div>
                     )}
                   </div>
+
                 ))}
               </div>
             </div>
@@ -440,16 +455,23 @@ const CreateBroadcast = () => {
                     </div>
                   </div>
 
-                  <div className="md:flex md:space-x-4">
+                  <div className="md:flex md:space-x-4 items-center">
                     <button
                       onClick={launchBroadcast}
-                      className="bg-green-600 w-full md:w-auto text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700"
+                      className="bg-green-600 w-full md:w-auto text-white px-6 py-3 h-12 rounded-lg font-medium hover:bg-green-700"
                     >
                       <RocketLaunch className="mr-2" /> Launch Broadcast
                     </button>
                     <button
                       onClick={saveDraft}
-                      className="bg-gray-600 w-full md:w-auto mt-3 md:mt0 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700"
+                      className="w-full h-12 md:w-auto mt-3 md:mt-0 text-white px-6 py-3 rounded-lg font-medium"
+                      style={{ backgroundColor: themeColor }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = themeColor;
+                      }}
                     >
                       <Save className="mr-2" /> Save as Draft
                     </button>
@@ -466,7 +488,14 @@ const CreateBroadcast = () => {
         {currentStep > 1 && (
           <button
             onClick={previousStep}
-            className="bg-gray-600 w-full md:w-auto text-white px-6 py-2 rounded-lg hover:bg-gray-700"
+            className="w-full md:w-auto text-white px-6 py-2 rounded-lg"
+            style={{ backgroundColor: themeColor }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = secondaryThemeColor;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = themeColor;
+            }}
           >
             <ArrowBack className="mr-2" /> Previous
           </button>
@@ -477,8 +506,24 @@ const CreateBroadcast = () => {
           <button
             onClick={nextStep}
             disabled={!canProceed()}
-            className={`text-white w-full md:w-auto mt-3 md:mt-0 px-6 py-2 rounded-lg ${canProceed() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+            // className={`text-white w-full md:w-auto mt-3 md:mt-0 px-6 py-2 rounded-lg ${canProceed() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+            //   }`}
+            className={`text-white w-full md:w-auto mt-3 md:mt-0 px-6 py-2 rounded-lg ${canProceed() ? '' : 'bg-gray-400 cursor-not-allowed'
               }`}
+            style={
+              canProceed()
+                ? {
+                  backgroundColor: themeColor,
+                  transition: 'background-color 0.3s ease',
+                }
+                : {}
+            }
+            onMouseEnter={(e) => {
+              if (canProceed()) e.currentTarget.style.backgroundColor = secondaryThemeColor;
+            }}
+            onMouseLeave={(e) => {
+              if (canProceed()) e.currentTarget.style.backgroundColor = themeColor;
+            }}
           >
             Next <ArrowForward className="ml-2" />
           </button>

@@ -218,27 +218,20 @@ const navItemsAdmin = [
     },
 ]
 
-const Sidebar = ({ onClose, isCompact, showSidebar }) => {
+const Sidebar = ({ onClose, isCompact, showSidebar, onMouseEnter, onMouseLeave }) => {
     const [openSubmenu, setOpenSubmenu] = useState(null);
-    const { role } = useContext(ContentContext);
+    const [hoveredItem, setHoveredItem] = useState(null);
+    const [hoveredSubItem, setHoveredSubItem] = useState(null);
+    const [hoveredNavItem, setHoveredNavItem] = useState(null);
+    const { role, themeColor, secondaryThemeColor } = useContext(ContentContext);
 
     const toggleSubmenu = (label) => {
         setOpenSubmenu(openSubmenu === label ? null : label);
     };
 
     return (
-        <aside className={`h-full bg-primary-600 text-white border-r border-gray-200 overflow-y-auto ${isCompact ? 'w-64' : ''}`}>
+        <aside onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{ backgroundColor: themeColor }} className={`h-full text-white border-r border-gray-200 overflow-y-auto ${isCompact ? 'w-64' : ''}`}>
             <nav className="p-3 px-2 relative h-full">
-                {/* Close button for mobile and small laptop */}
-                {/* {(isCompact || onClose) && (
-                    <button
-                        className="lg:hidden absolute top-2 right-2 text-white p-1 rounded-full hover:bg-blue-700"
-                        onClick={onClose}
-                    >
-                        <CloseIcon />
-                    </button>
-                )} */}
-
                 <ul className="space-y-2 lg:mt-0">
                     {(role !== 'admin' ? navItems : navItemsAdmin).map((item) => (
                         <li key={item.label}>
@@ -246,13 +239,22 @@ const Sidebar = ({ onClose, isCompact, showSidebar }) => {
                                 <NavLink
                                     to={item.path}
                                     className={({ isActive }) =>
-                                        `flex items-center space-x-2 px-2 py-3 rounded-lg cursor-pointer ${isActive ? 'bg-blue-900 text-white' : 'text-white hover:bg-blue-900'
-                                        }`}
+                                        `flex items-center space-x-2 px-2 py-3 rounded-lg cursor-pointer text-white`
+                                    }
+                                    style={({ isActive }) => ({
+                                        backgroundColor:
+                                            hoveredNavItem === item.label || isActive
+                                                ? secondaryThemeColor
+                                                : 'transparent',
+                                    })}
                                     onClick={onClose}
+                                    onMouseEnter={() => setHoveredNavItem(item.label)}
+                                    onMouseLeave={() => setHoveredNavItem(null)}
                                 >
                                     <item.icon className="text-gray-200" />
                                     <span
-                                        className={`transition-all duration-300 ${showSidebar ? 'opacity-100 max-w-[200px] ml-1' : 'opacity-0 max-w-0 ml-0'} whitespace-nowrap text-gray-200`}
+                                        className={`transition-all duration-300 ${showSidebar ? 'opacity-100 max-w-[200px] ml-1' : 'opacity-0 max-w-0 ml-0'
+                                            } whitespace-nowrap text-gray-200`}
                                     >
                                         {item.label}
                                     </span>
@@ -261,8 +263,15 @@ const Sidebar = ({ onClose, isCompact, showSidebar }) => {
                                 <div>
                                     <div
                                         onClick={() => toggleSubmenu(item.label)}
-                                        className={`flex items-center justify-between px-1 py-3 rounded-lg cursor-pointer ${openSubmenu === item.label ? 'bg-blue-900 text-white' : 'text-white hover:bg-blue-900'
-                                            }`}
+                                        onMouseEnter={() => setHoveredItem(item.label)}
+                                        onMouseLeave={() => setHoveredItem(null)}
+                                        className="flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-white"
+                                        style={{
+                                            backgroundColor:
+                                                openSubmenu === item.label || hoveredItem === item.label
+                                                    ? secondaryThemeColor
+                                                    : themeColor,
+                                        }}
                                     >
                                         <div className="flex items-center space-x-3">
                                             <item.icon className="text-gray-200" />
@@ -290,11 +299,19 @@ const Sidebar = ({ onClose, isCompact, showSidebar }) => {
                                                     <NavLink
                                                         to={subItem.path}
                                                         className={({ isActive }) =>
-                                                            `${!showSidebar ? 'hidden' : ''} flex items-center space-x-3 px-3 py-2 rounded-lg cursor-pointer ${isActive ? 'bg-blue-900 text-white' : 'hover:bg-blue-900'
-                                                            }`}
+                                                            `${!showSidebar ? 'hidden' : ''} flex items-center space-x-3 px-3 py-2 rounded-lg cursor-pointer text-white`
+                                                        }
+                                                        style={({ isActive }) => ({
+                                                            backgroundColor:
+                                                                hoveredSubItem === subItem.label || isActive
+                                                                    ? secondaryThemeColor
+                                                                    : 'transparent',
+                                                        })}
+                                                        onMouseEnter={() => setHoveredSubItem(subItem.label)}
+                                                        onMouseLeave={() => setHoveredSubItem(null)}
                                                         onClick={onClose}
                                                     >
-                                                        <span >{subItem.label}</span>
+                                                        <span>{subItem.label}</span>
                                                     </NavLink>
                                                 </li>
                                             ))}

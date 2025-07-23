@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faComments, faChartLine, faMessage, faBullhorn, faSitemap, faUsers, faRobot,
   faSearch, faBell, faChevronDown, faDownload, faSync, faEdit, faPlus, faTrash,
   faBrain, faTags, faComment, faBolt, faFlask, faTimes, faPlay
 } from '@fortawesome/free-solid-svg-icons';
+import { ContentContext } from '../../context/ContextProvider';
 
 const AIAgent = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIntent, setSelectedIntent] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('en');

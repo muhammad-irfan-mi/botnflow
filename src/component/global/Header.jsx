@@ -13,12 +13,12 @@ import {
   Phone,
   Notifications,
 } from '@mui/icons-material';
+import SettingsInputSvideoIcon from '@mui/icons-material/SettingsInputSvideo';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/logo.png'
 import { ContentContext } from '../../context/ContextProvider';
 
 const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
-  const { role, setRole } = useContext(ContentContext)
+  const { role, setRole, logoImage, setCustomizationModal } = useContext(ContentContext)
   const [dropdown, setDropdown] = useState('');
   const [currentStatus, setCurrentStatus] = useState('online');
   const navigate = useNavigate()
@@ -69,6 +69,10 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
   const handleAPICredential = () => {
     setDropdown('');
     navigate('/api-credential')
+  }
+  const handleCustomization = () => {
+    setDropdown('');
+    setCustomizationModal(true)
   }
 
 
@@ -262,7 +266,7 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
           {/* )} */}
           <span className="ml-2 sm:ml-3 flex items-center cursor-pointer">
             <img
-              src={logo}
+              src={logoImage}
               alt="logo"
               className="w-28 sm:w-36 md:w-40 h-auto max-h-12 object-contain"
             />
@@ -410,6 +414,10 @@ const Header = ({ onToggleSidebar, showSidebarButton, isSidebarOpen }) => {
                 <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={handleAPICredential}>
                   <VpnKey className="mr-2 w-5" fontSize="small" />
                   API Credentials
+                </span>
+                <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={handleCustomization}>
+                  <SettingsInputSvideoIcon className="mr-2 w-5" fontSize="small" />
+                  Customization
                 </span>
                 <span className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={handleRole}>
                   <Shield className="mr-2 w-5" fontSize="small" />

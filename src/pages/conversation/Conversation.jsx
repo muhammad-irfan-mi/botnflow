@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
     WhatsApp as WhatsAppIcon,
     Sms as SmsIcon,
@@ -18,6 +18,7 @@ import {
     Phone
 } from "@mui/icons-material";
 import { TextField, InputAdornment, IconButton, Button, Avatar, Divider } from "@mui/material";
+import { ContentContext } from "../../context/ContextProvider";
 
 const conversations = {
     john: {
@@ -34,8 +35,16 @@ const conversations = {
 const Conversations = () => {
     const [selectedContact, setSelectedContact] = useState("john");
     const contact = conversations[selectedContact];
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
     const [tab, setTab] = useState("activity");
     const [active, setActive] = useState("whatsapp");
+
+    const [startCall, setStartCall] = useState(false)
+
+    const tabStyle = (tabName) => ({
+        color: tab === tabName ? themeColor : '',
+        borderBottom: tab === tabName ? `2px solid ${themeColor}` : '2px solid transparent'
+    });
 
     const renderTabContent = () => {
         switch (tab) {
@@ -127,9 +136,10 @@ const Conversations = () => {
                             <button
                                 onClick={() => setActive("whatsapp")}
                                 className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "whatsapp"
-                                    ? "bg-white text-blue-600 shadow-sm"
-                                    : "text-gray-600 hover:text-gray-900"
+                                        ? "bg-white shadow-sm"
+                                        : "text-gray-600 hover:text-gray-900"
                                     }`}
+                                style={active === "whatsapp" ? { color: themeColor } : {}}
                             >
                                 <WhatsAppIcon fontSize="small" className="mr-1" /> WhatsApp
                             </button>
@@ -137,9 +147,10 @@ const Conversations = () => {
                             <button
                                 onClick={() => setActive("sms")}
                                 className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "sms"
-                                    ? "bg-white text-blue-600 shadow-sm"
-                                    : "text-gray-600 hover:text-gray-900"
+                                        ? "bg-white shadow-sm"
+                                        : "text-gray-600 hover:text-gray-900"
                                     }`}
+                                style={active === "sms" ? { color: themeColor } : {}}
                             >
                                 <SmsIcon fontSize="small" className="mr-1" /> SMS
                             </button>
@@ -147,9 +158,10 @@ const Conversations = () => {
                             <button
                                 onClick={() => setActive("voice")}
                                 className={`flex-1 py-2 px-3 text-sm font-medium rounded-md ${active === "voice"
-                                    ? "bg-white text-blue-600 shadow-sm"
-                                    : "text-gray-600 hover:text-gray-900"
+                                        ? "bg-white shadow-sm"
+                                        : "text-gray-600 hover:text-gray-900"
                                     }`}
+                                style={active === "voice" ? { color: themeColor } : {}}
                             >
                                 <PhoneIcon fontSize="small" className="mr-1" /> Voice
                             </button>
@@ -221,9 +233,10 @@ const Conversations = () => {
                             >
                                 <div className="max-w-xs lg:max-w-md">
                                     <div
-                                        className={`rounded-lg p-3 shadow-sm ${msg.type === "sent" ? "bg-blue-600 text-white" : "bg-white text-gray-900"
-                                            }`}
+                                        className={`rounded-lg p-3 shadow-sm ${msg.type === "sent" ? "text-white" : "bg-white text-gray-900"}`}
+                                        style={msg.type === "sent" ? { backgroundColor: themeColor } : {}}
                                     >
+
                                         <p className="text-sm">{msg.text}</p>
                                     </div>
                                     <div
@@ -272,10 +285,9 @@ const Conversations = () => {
                         {["activity", "stats", "notes"].map((t) => (
                             <button
                                 key={t}
-                                className={`flex-1 py-3 px-4 text-sm font-medium border-b-2 transition ${tab === t
-                                    ? "text-blue-600 border-blue-600"
-                                    : "text-gray-500 hover:text-gray-700 border-transparent"
-                                    }`}
+                                style={tabStyle(t)}
+                                className={`flex-1 py-3 px-4 text-sm font-medium border-b-2 transition "text-blue-600 border-blue-600 text-gray-500 hover:text-gray-700 border-transparent"
+                                    `}
                                 onClick={() => setTab(t)}
                             >
                                 {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -287,7 +299,9 @@ const Conversations = () => {
                 <div className="flex-1 overflow-y-auto p-4">{renderTabContent()}</div>
 
                 <div className="p-4 border-t border-gray-200 space-y-2">
-                    <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+                    <button onMouseEnter={() => setStartCall(true)} onMouseLeave={() => setStartCall(false)} style={{
+                        backgroundColor: startCall ? secondaryThemeColor : themeColor,
+                    }} className="w-full text-white py-2 px-4 rounded-lg hover:bg-blue-700">
                         <i className="fa-solid fa-phone mr-2"></i>Start Call
                     </button>
                     <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50">

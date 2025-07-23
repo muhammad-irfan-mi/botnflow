@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Add,
   Search,
@@ -22,6 +22,7 @@ import {
   Chat,
   AccountCircle
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const FlowCard = ({ flow }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -134,7 +135,7 @@ const FlowCard = ({ flow }) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
             className="fixed inset-0 bg-black opacity-70"
-            onClick={()=> setShowDeleteModal(false)}
+            onClick={() => setShowDeleteModal(false)}
           ></div>
 
           <div
@@ -184,6 +185,8 @@ const WhatsAppIcon = ({ fontSize, className }) => (
 );
 
 const Flow = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+
   const flows = [
     {
       id: 1,
@@ -345,7 +348,9 @@ const Flow = () => {
                 {/* View Toggle */}
                 <div className="relative ml-auto">
                   <div className="flex border border-gray-300 rounded-md overflow-hidden">
-                    <button className="px-3 py-2 bg-primary-600 text-white flex items-center">
+                    <button className="px-3 py-2  text-white flex items-center"
+                      style={{ backgroundColor: themeColor }}
+                    >
                       <Apps className="text-sm" />
                     </button>
                     <button className="px-3 py-2 bg-white hover:bg-gray-50 transition-colors flex items-center">
@@ -394,7 +399,7 @@ const Flow = () => {
             <button className="border border-gray-300 rounded-l-md px-3 py-1 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
               <ChevronLeft fontSize="small" />
             </button>
-            <button className="border-t border-b border-gray-300 px-3 py-1 bg-primary-600 text-white">1</button>
+            <button style={{ backgroundColor: themeColor }} className="border-t border-b border-gray-300 px-3 py-1 text-white">1</button>
             <button className="border-t border-b border-gray-300 px-3 py-1 bg-white text-gray-700 hover:bg-gray-50">2</button>
             <button className="border-t border-b border-gray-300 px-3 py-1 bg-white text-gray-700 hover:bg-gray-50">3</button>
             <button className="border-t border-b border-gray-300 px-3 py-1 bg-white text-gray-700 hover:bg-gray-50">4</button>
@@ -427,7 +432,15 @@ const Flow = () => {
           </div>
           <h2 className="text-xl font-medium text-gray-800 mb-2">No flows yet</h2>
           <p className="text-gray-600 mb-6 text-center max-w-md">Automate your first customer journey with a flow.</p>
-          <button className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md flex items-center transition-all">
+          <button className="text-white px-4 py-2 rounded-md flex items-center transition-all"
+            style={{ backgroundColor: themeColor }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = secondaryThemeColor;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = themeColor;
+            }}
+          >
             <Add className="mr-2" />
             Create New Flow
           </button>

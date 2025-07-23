@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Search,
     LocationOn,
@@ -32,6 +32,7 @@ import {
     CheckBox,
     CheckBoxOutlineBlank
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const LeadGeneration = () => {
     const [showProfileFinderModal, setShowProfileFinderModal] = useState(false);
@@ -42,6 +43,8 @@ const LeadGeneration = () => {
     const [showMoreFiltersModal, setShowMoreFiltersModal] = useState(false);
     const [searchProgress, setSearchProgress] = useState(false);
     const [progress, setProgress] = useState(0);
+
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
 
     // Data arrays
     const popularCategories = [
@@ -221,15 +224,25 @@ const LeadGeneration = () => {
                             <p className="mt-2">Discover and collect business leads from Google Maps, web searches, and social media platforms</p>
                         </div>
                         <div className="mt-4 lg:mt-0 flex items-center space-x-3">
-                            <div className="bg-primary-600 bg-opacity-20 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <div
+                                className="bg-opacity-20 backdrop-blur-sm rounded-lg px-4 py-2 transition-colors duration-200 cursor-pointer"
+                                style={{ backgroundColor: themeColor }}
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = secondaryThemeColor)}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = themeColor)}
+                            >
                                 <div className="flex items-center text-white">
                                     <i className="fa-solid fa-chart-line mr-2"></i>
                                     <span className="text-sm">24 searches today</span>
                                 </div>
                             </div>
-                            <div className="bg-primary-600 bg-opacity-20 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <div
+                                className="bg-opacity-20 backdrop-blur-sm rounded-lg px-4 py-2 transition-colors duration-200 cursor-pointer"
+                                style={{ backgroundColor: themeColor }}
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = secondaryThemeColor)}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = themeColor)}
+                            >
                                 <div className="flex items-center text-white">
-                                    <i className="fa-solid fa-database mr-2"></i>
+                                    <i className="fa-solid fa-chart-line mr-2"></i>
                                     <span className="text-sm">1,247 leads found</span>
                                 </div>
                             </div>
@@ -240,14 +253,14 @@ const LeadGeneration = () => {
                 {/* Search Interface */}
                 <div id="search-interface" className="px-3 mt-3 z-10">
                     <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                        <div className="flex flex-col lg:flex-row lg:items-end gap-4">
+                        <div className="md:flex items-center gap-3">
                             <div className="flex-grow">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">What are you looking for?</label>
                                 <div className="relative">
                                     <input
                                         type="text"
                                         placeholder="e.g., coffee shops, restaurants, dental clinics, auto repair shops"
-                                        className="pl-12 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
+                                        className="h-12 pl-12 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-lg"
                                     />
                                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
                                 </div>
@@ -258,14 +271,14 @@ const LeadGeneration = () => {
                                     <input
                                         type="text"
                                         placeholder="City, State or ZIP code"
-                                        className="pl-12 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        className="h-12 pl-12 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                                     />
                                     <LocationOn className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                 </div>
                             </div>
                             <div className="lg:w-48">
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Radius</label>
-                                <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <label className="text-sm font-medium text-gray-700 mb-2">Radius</label>
+                                <select className="h-12 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
                                     <option>5 miles</option>
                                     <option>10 miles</option>
                                     <option>25 miles</option>
@@ -273,13 +286,16 @@ const LeadGeneration = () => {
                                     <option>100 miles</option>
                                 </select>
                             </div>
-                            <button
+                            <div
                                 onClick={startSearch}
-                                className="px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 flex items-center font-medium transition-colors"
+                                className="h-12 px-8 py-3 mt-5 text-white rounded-lg flex items-center font-medium transition-colors"
+                                style={{ backgroundColor: themeColor }}
+                                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = secondaryThemeColor)}
+                                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = themeColor)}
                             >
                                 <Search className="mr-2" />
                                 Find Businesses
-                            </button>
+                            </div>
                         </div>
 
                         {/* Search Sources */}
@@ -390,12 +406,12 @@ const LeadGeneration = () => {
                 {/* Search Results */}
                 <div id="search-results" className="px-3 mt-5">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 lg:flex justify-between items-center">
+                        <div className="bg-gray-50 px-2 md:px-6 py-4 border-b border-gray-200 lg:flex justify-between items-center">
                             <div className="flex justify-between items-center">
-                                <h3 className="text-lg font-semibold text-gray-800">Search Results</h3>
-                                <span className="ml-3 px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full">1,247 businesses found</span>
+                                <h3 className="text-md md:text-lg md:font-semibold font-medium text-gray-800">Search Results</h3>
+                                <span className="ml-3 px-2 md:px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full">1,247 businesses found</span>
                             </div>
-                            
+
                             <div className="md:flex justify-between items-center space-x-3 mt-3 lg:mt-0">
                                 <div className='flex justify-between mt-3 md:mt-0'>
                                     <button
@@ -416,14 +432,21 @@ const LeadGeneration = () => {
                                 <div className='flex justify-between mt-3 md:mt-0'>
                                     <button
                                         onClick={() => setShowExportModal(true)}
-                                        className="flex items-center px-3 py-1.5 text-sm text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded"
+                                        className="flex items-center px-3 py-1.5 text-sm rounded transition-colors duration-200"
+                                        style={{ color: themeColor }}
+                                        onMouseEnter={(e) => (e.currentTarget.style.color = secondaryThemeColor)}
+                                        onMouseLeave={(e) => (e.currentTarget.style.color = themeColor)}
                                     >
                                         <FileDownload className="mr-1.5" />
                                         Export All
                                     </button>
+
                                     <button
                                         onClick={() => console.log("Save All")}
-                                        className="flex items-center px-3 py-1.5 text-sm bg-primary-600 text-white hover:bg-primary-700 rounded"
+                                        className="flex items-center px-3 py-1.5 text-sm text-white rounded transition-colors duration-200"
+                                        style={{ backgroundColor: themeColor }}
+                                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = secondaryThemeColor)}
+                                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = themeColor)}
                                     >
                                         <Save className="mr-1.5" />
                                         Save All
@@ -437,7 +460,7 @@ const LeadGeneration = () => {
                                 <div key={business.id} className="p-3 hover:bg-gray-50 transition-colors">
                                     <div className="flex flex-col lg:flex-row lg:items-start gap-4">
                                         <div className="flex-shrink-0">
-                                            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                                            <div style={{ backgroundColor: themeColor }} className="w-16 h-16 bg-gradient-to-br rounded-lg flex items-center justify-center">
                                                 <Restaurant className="text-white text-2xl" />
                                             </div>
                                         </div>
@@ -478,7 +501,14 @@ const LeadGeneration = () => {
                                                     <div className="mt-4 flex items-center space-x-2">
                                                         <button
                                                             onClick={() => saveLead(business.id)}
-                                                            className="px-3 py-1.5 bg-primary-600 text-white rounded hover:bg-primary-700 flex items-center text-sm"
+                                                            className="px-3 py-1.5 text-white rounded hover:bg-primary-700 flex items-center text-sm"
+                                                            style={{ backgroundColor: themeColor }}
+                                                            onMouseEnter={(e) => {
+                                                                e.target.style.backgroundColor = secondaryThemeColor; 
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.target.style.backgroundColor = themeColor;
+                                                            }}
                                                         >
                                                             <Add className="mr-1.5" />
                                                             Save

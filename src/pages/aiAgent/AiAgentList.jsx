@@ -27,8 +27,12 @@ import {
     Lock as LockIcon
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { ContentContext } from '../../context/ContextProvider';
 
 const AiAgentList = () => {
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [showContextMenu, setShowContextMenu] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({ top: 0, left: 0 });
@@ -208,7 +212,7 @@ const AiAgentList = () => {
 
     return (
         <div className="bg-gray-50 mt-16 font-sans">
-          
+
             {/* Main Content */}
             <div className="container mx-auto p-3">
                 <div className="flex justify-between items-center mb-3">
@@ -239,31 +243,31 @@ const AiAgentList = () => {
                             />
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3">
-                                <select
-                                    className='bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm'
-                                >
-                                    <option value="">Language: All</option>
-                                    <option value="en">English</option>
-                                    <option value="ur">Urdu</option>
-                                    <option value="ar">Arabic</option>
-                                </select>
-                                <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-                                    <option value="">Status: All</option>
-                                    <option value="ready">Ready</option>
-                                    <option value="training">Training</option>
-                                    <option value="archived">Archived</option>
-                                </select>
-                                <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-                                    <option value="">Domain: All</option>
-                                    <option value="support">Support</option>
-                                    <option value="sales">Sales</option>
-                                    <option value="faq">FAQ Bot</option>
-                                </select>
-                                <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-                                    <option value="">Created By: All</option>
-                                    <option value="me">Me</option>
-                                    <option value="team">Team</option>
-                                </select>
+                            <select
+                                className='bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm'
+                            >
+                                <option value="">Language: All</option>
+                                <option value="en">English</option>
+                                <option value="ur">Urdu</option>
+                                <option value="ar">Arabic</option>
+                            </select>
+                            <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                                <option value="">Status: All</option>
+                                <option value="ready">Ready</option>
+                                <option value="training">Training</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                            <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                                <option value="">Domain: All</option>
+                                <option value="support">Support</option>
+                                <option value="sales">Sales</option>
+                                <option value="faq">FAQ Bot</option>
+                            </select>
+                            <select className="bg-white border border-gray-300 rounded-lg px-4 h-10 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                                <option value="">Created By: All</option>
+                                <option value="me">Me</option>
+                                <option value="team">Team</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -285,7 +289,7 @@ const AiAgentList = () => {
                 </div>
 
                 {/* Agent Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                     {agents.map((agent, index) => (
                         <div key={agent.id} className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                             <div className="p-5">
@@ -333,7 +337,14 @@ const AiAgentList = () => {
                                 </div>
                             </div>
                             <div className="border-t border-gray-200 px-5 py-3 bg-gray-50 flex justify-between">
-                                <button className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center" onClick={handleNavigate}>
+                                <button className=" font-medium text-sm flex items-center" onClick={handleNavigate}
+                                    style={{ color: themeColor }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.color = secondaryThemeColor;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.color = themeColor;
+                                    }}>
                                     <OpenInNewIcon className="mr-1.5" style={{ fontSize: '1rem' }} />
                                     Open
                                 </button>
@@ -360,8 +371,15 @@ const AiAgentList = () => {
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-xl font-semibold text-gray-800">Create New Agent</h3>
                                 <button
-                                    className="text-gray-400 hover:text-gray-600"
+                                    className="text-gray-400"
                                     onClick={() => setShowCreateModal(false)}
+                                    style={{ backgroundColor: themeColor }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor = themeColor;
+                                    }}
                                 >
                                     <CloseIcon />
                                 </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Search,
     KeyboardArrowDown,
@@ -27,8 +27,10 @@ import {
     LocationOn,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { ContentContext } from '../../context/ContextProvider';
 
 const BroadCast = () => {
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
     const [showProfileFinder, setShowProfileFinder] = useState(false);
 
     const navigate = useNavigate()
@@ -172,7 +174,15 @@ const BroadCast = () => {
                             <FileDownload className="mr-2" />
                             Export
                         </button>
-                        <button className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 flex items-center" onClick={handleNavigate}>
+                        <button className="px-4 py-2 text-white rounded-md flex items-center" onClick={handleNavigate}
+                            style={{ backgroundColor: themeColor }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = themeColor;
+                            }}
+                        >
                             <Add className="mr-2" />
                             New Campaign
                         </button>
@@ -396,7 +406,15 @@ const BroadCast = () => {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <span className="text-primary-600 hover:text-primary-900 mr-3 cursor-pointer">View</span>
+                                            <span className="mr-3 cursor-pointer"
+                                                style={{ color: themeColor }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.color = secondaryThemeColor;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.color = themeColor;
+                                                }}
+                                            >View</span>
                                             <span className="text-gray-600 hover:text-gray-900 mr-3 cursor-pointer">Edit</span>
                                             <span className="text-gray-600 hover:text-gray-900 cursor-pointer">
                                                 <MoreVert />
@@ -428,7 +446,8 @@ const BroadCast = () => {
                                         <span className="sr-only">Previous</span>
                                         <ChevronLeft className="h-5 w-5" />
                                     </span>
-                                    <span className="z-10 bg-primary-50 border-primary-500 text-primary-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer" aria-current="page">
+                                    <span className="z-10 bg-primary-50 border-primary-500 text-primary-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer" aria-current="page"
+                                    >
                                         1
                                     </span>
                                     <span className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer">

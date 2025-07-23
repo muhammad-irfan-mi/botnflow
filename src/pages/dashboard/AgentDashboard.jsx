@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import {
@@ -26,8 +26,10 @@ import {
   Computer as ComputerIcon,
   PhoneAndroid as PhoneAndroidIcon
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const AgentDashboard = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
   // Response Time Distribution Chart
   const responseChartOptions = {
     chart: {
@@ -245,7 +247,7 @@ const AgentDashboard = () => {
                 <DownloadIcon className="mr-2" />
                 Export
               </button>
-              <button className="bg-primary-600 hover:bg-primary-700 h-10 text-white md:px-4 px-1 py-2 rounded-md flex items-center">
+              <button style={{ backgroundColor: themeColor }} className="bg-primary-600 hover:bg-primary-700 h-10 text-white md:px-4 px-1 py-2 rounded-md flex items-center">
                 <AddIcon className="mr-2" />
                 Add
               </button>
@@ -610,8 +612,18 @@ const AgentDashboard = () => {
               </tbody>
             </table>
           </div>
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          {/* <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button className="text-sm text-primary-600 hover:text-primary-900">View All Agents <ArrowForwardIcon className="ml-1 text-xs" /></button>
+          </div> */}
+          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <span
+              className="text-xs cursor-pointer transition-colors duration-200 items-center"
+              style={{ color: themeColor }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = secondaryThemeColor)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = themeColor)}
+            >
+              View All Agents <ArrowForwardIcon className="ml-1 text-xs"/>
+            </span>
           </div>
         </div>
 
@@ -765,8 +777,18 @@ const AgentDashboard = () => {
               </tbody>
             </table>
           </div>
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          {/* <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button className="text-sm text-primary-600 hover:text-primary-900">View All Missed Follow-ups <ArrowForwardIcon className="ml-1 text-xs" /></button>
+          </div> */}
+          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+            <span
+              className="text-xs cursor-pointer transition-colors duration-200 items-center"
+              style={{ color: themeColor }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = secondaryThemeColor)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = themeColor)}
+            >
+              View All Missed Follow-ups<ArrowForwardIcon className='ml-1 text-xs' />
+            </span>
           </div>
         </div>
 
