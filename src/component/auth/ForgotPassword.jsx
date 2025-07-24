@@ -9,9 +9,9 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="flex justify-between bg-gray-50">
-            <div className="w-[50%] flex flex-col items-center px-6 py-12 lg:px-8">
-                <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-lg">
+        <div className="lg:flex justify-between bg-gray-50">
+            <div className="lg:w-[50%] w-full flex flex-col items-center px-3 md:px-6 py-3 md:py-6 lg:py-12 lg:px-8">
+                <div className="w-full max-w-md space-y-8 bg-white p-3 md:p-5 lg:p-8 rounded-xl shadow-lg">
                     <div className="flex justify-center items-center">
                         <img src={logo} alt="" className='w-60' />
                     </div>
@@ -55,8 +55,8 @@ const ForgotPassword = () => {
                     <div className="mt-8 text-center">
                         <p className="text-sm text-gray-600">
                             Don't have an account?
-                            <Link to='/signup' className='ml-1 font-medium text-primary-600 cursor-pointer'>
-                                Signup for Account!
+                            <Link to='/' className='ml-1 font-medium text-primary-600 cursor-pointer'>
+                                Login for Account!
                             </Link>
                         </p>
                     </div>
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
                 </div>
             </div>
 
-            <div className='w-[50%]'>
+            <div className='lg:w-[50%] w-full'>
                 <VisualPanel />
             </div>
         </div>

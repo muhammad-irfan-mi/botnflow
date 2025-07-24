@@ -13,10 +13,10 @@ const Signup = () => {
     };
 
     return (
-        <div className="flex justify-between bg-gray-50">
+        <div className="lg:flex justify-between bg-gray-50">
             {/* Left Side (Signup Panel) */}
-            <div className="w-[50%] flex flex-col items-center px-6 py-12 lg:px-8">
-                <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-lg">
+            <div className="lg:w-[50%] w-full flex flex-col items-center px-3 md:px-6 py-3 md:py-6 lg:py-12 lg:px-8">
+                <div className="w-full max-w-md space-y-8 bg-white p-3 md:p-5 lg:p-8 rounded-xl shadow-lg">
                     {/* Logo */}
                     <div className="flex justify-center items-center">
                         {/* <div className="bg-primary-600 p-2 rounded-lg">
@@ -156,7 +156,7 @@ const Signup = () => {
             </div>
 
             {/* Right Side (Visual Panel) */}
-            <div className='w-[50%]'>
+            <div className='lg:w-[50%] w-full'>
                 <VisualPanel />
             </div>
         </div>

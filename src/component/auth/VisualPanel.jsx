@@ -3,7 +3,7 @@ import { FaComments, FaRobot, FaLock as FaLockIcon, FaChartLine } from 'react-ic
 const VisualPanel = () => {
   return (
     <div className="w-full h-full bg-primary-600 text-white p-6 md:p-12 flex flex-col">
-      <div className="h-[600px] lg:h-full flex flex-col">
+      <div className="lg:h-full flex flex-col">
         <div className="mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful Communication Tools</h2>
           <p className="text-lg text-primary-100 mb-6">

@@ -13,9 +13,9 @@ const Login = () => {
     };
 
     return (
-        <div className="flex justify-between bg-gray-50">
-            <div className="w-[50%] flex flex-col items-center px-6 py-12 lg:px-8">
-                <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-lg">
+        <div className="lg:flex justify-between bg-gray-50">
+            <div className="lg:w-[50%] w-full flex flex-col items-center px-3 md:px-6 py-3 md:py-6 lg:py-12 lg:px-8">
+                <div className="w-full max-w-md space-y-8 bg-white p-3 md:p-5 lg:p-8 rounded-xl shadow-lg">
                     <div className="flex justify-center items-center">
                         <img src={logo} alt="" className='w-60' />
                     </div>
@@ -152,7 +152,7 @@ const Login = () => {
                 </div>
             </div>
 
-            <div className='w-[50%]'>
+            <div className='lg:w-[50%] w-full'>
                 {/* Right Side (Visual Panel) */}
                 <VisualPanel />
             </div>
