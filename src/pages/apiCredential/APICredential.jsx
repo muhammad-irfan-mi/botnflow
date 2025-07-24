@@ -94,7 +94,7 @@ const APICredential = () => {
 
                 {/* API Keys Table */}
                 <div id="api-keys-table" className="px-3 pb-3">
-                    <div className="overflow-x-auto w-[290px] sm:w-[380px] md:w-[412px] lg:w-auto">
+                    <div className="overflow-x-auto w-[260px] sm:w-[380px] md:w-[412px] lg:w-auto">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
