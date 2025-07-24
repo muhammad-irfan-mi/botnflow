@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { 
+import React, { useState, useEffect, useContext } from 'react';
+import {
   Dashboard as DashboardIcon,
   List as ListIcon,
   Phone as PhoneIcon,
@@ -16,8 +16,11 @@ import {
   Info as InfoIcon,
   CheckCircle as CheckCircleIcon
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const CallQueue = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+
   const [callQueue, setCallQueue] = useState([
     {
       id: 1,
@@ -67,17 +70,17 @@ const CallQueue = () => {
   // Update wait times every second
   useEffect(() => {
     const interval = setInterval(() => {
-      setCallQueue(prevQueue => 
+      setCallQueue(prevQueue =>
         prevQueue.map(caller => {
           const [minutes, seconds] = caller.waitTime.split(':').map(Number);
           let newSeconds = seconds + 1;
           let newMinutes = minutes;
-          
+
           if (newSeconds >= 60) {
             newMinutes++;
             newSeconds = 0;
           }
-          
+
           return {
             ...caller,
             waitTime: `${newMinutes.toString().padStart(2, '0')}:${newSeconds.toString().padStart(2, '0')}`
@@ -100,7 +103,7 @@ const CallQueue = () => {
   }, []);
 
   const getStatusBadge = (status) => {
-    switch(status) {
+    switch (status) {
       case "Waiting":
         return "bg-yellow-100 text-yellow-800";
       case "New":
@@ -113,7 +116,7 @@ const CallQueue = () => {
   };
 
   const getPriorityBadge = (priority) => {
-    switch(priority) {
+    switch (priority) {
       case "VIP":
         return "bg-purple-100 text-purple-800";
       case "Repeat":
@@ -126,7 +129,7 @@ const CallQueue = () => {
   };
 
   const getIconColorClass = (color) => {
-    switch(color) {
+    switch (color) {
       case "blue":
         return "bg-blue-100 text-blue-600";
       case "green":
@@ -149,7 +152,7 @@ const CallQueue = () => {
               <h1 className="text-2xl font-bold text-gray-900">Call Queue</h1>
               <p className="text-gray-600">Monitor incoming calls and queue status</p>
             </div>
-            
+
             {/* <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <div className={`w-3 h-3 rounded-full animate-pulse ${
@@ -226,7 +229,14 @@ const CallQueue = () => {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
             <div className="md:flex items-center justify-between">
               <div className="md:flex items-center space-x-4">
-                <button className="w-full md:w-70 flex px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="w-full md:w-70 flex px-4 py-2 text-white rounded-lg transition-colors"
+                  style={{ backgroundColor: themeColor }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = themeColor;
+                  }}>
                   <PlayArrowIcon className="mr-2" />
                   Auto-Refresh
                 </button>
@@ -237,7 +247,7 @@ const CallQueue = () => {
                   <option>VIP Queue</option>
                 </select>
               </div>
-              
+
               <div className="flex items-center space-x-2 text-sm text-gray-600">
                 <SyncIcon />
                 <span>Last updated: {lastUpdated}</span>
@@ -250,7 +260,7 @@ const CallQueue = () => {
             <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900">Callers in Queue</h3>
             </div>
-            
+
             <div className="overflow-x-auto w-[295px] md:w-[740px] lg:w-auto">
               <table className="w-full">
                 <thead className="bg-gray-50">
@@ -277,10 +287,9 @@ const CallQueue = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{caller.phone}</td>
-                      <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                        parseInt(caller.waitTime.split(':')[0]) > 5 ? "text-red-600" : 
+                      <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${parseInt(caller.waitTime.split(':')[0]) > 5 ? "text-red-600" :
                         parseInt(caller.waitTime.split(':')[0]) > 2 ? "text-orange-600" : "text-green-600"
-                      }`}>
+                        }`}>
                         {caller.waitTime}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">

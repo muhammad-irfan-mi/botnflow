@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     Assessment,
     Phone,
@@ -15,8 +15,10 @@ import {
     AccessTime
 } from '@mui/icons-material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { ContentContext } from '../../context/ContextProvider';
 
 const AgentDashBoard = () => {
+    const {themeColor, secondaryThemeColor} = useContext(ContentContext)
     const [status, setStatus] = useState('Available');
     const [callTime, setCallTime] = useState({ minutes: 2, seconds: 45 });
     const [queuedCall, setQueuedCall] = useState({ name: 'Mike Davis', number: '+1 (555) 987-6543', position: 2 });
@@ -49,7 +51,7 @@ const AgentDashBoard = () => {
     };
 
     return (
-        <div className="flex mt-16 h-screen bg-gray-50">
+        <div className="flex mt-16 h-screen bg-gray-50 pb-3">
             {/* Main Content */}
             <main className="flex-1 overflow-auto">
                 <header className="bg-white border-b border-gray-200 p-3">
@@ -155,7 +157,14 @@ const AgentDashBoard = () => {
                             <div className="p-3 md:p-6 border-b border-gray-200">
                                 <div className="flex sm:flex gap-2 items-center justify-between">
                                     <h2 className="text-xl font-bold text-gray-900">Active Calls</h2>
-                                    <button className="bg-primary-600 text-white md:px-4 px-1 py-2 rounded-lg font-medium transition-colors">
+                                    <button className="text-white md:px-4 px-1 py-2 rounded-lg font-medium transition-colors"
+                                        style={{ backgroundColor: themeColor }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = themeColor;
+                                        }}>
                                         <Phone className="mr-2" /> Start Dialer
                                     </button>
                                 </div>

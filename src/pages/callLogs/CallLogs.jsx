@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Dashboard,
   Phone,
@@ -20,8 +20,10 @@ import {
   LocationOn,
   ArrowDownward
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const CallLogs = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
   const [expandedRows, setExpandedRows] = useState([]);
 
   const toggleRow = (rowId) => {
@@ -156,7 +158,14 @@ const CallLogs = () => {
                 <p className="text-sm text-gray-500">Track and manage all call activities</p>
               </div>
               <div className="flex items-center space-x-4 mt-3 md:mt-0">
-                <button className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                <button className="flex items-center space-x-2 px-4 py-2 text-white rounded-lg"
+                  style={{ backgroundColor: themeColor }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = themeColor;
+                  }}>
                   <Download fontSize="small" />
                   <span>Export</span>
                 </button>

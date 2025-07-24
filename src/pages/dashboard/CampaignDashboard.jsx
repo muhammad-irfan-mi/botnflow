@@ -575,10 +575,6 @@ const CampaignDashboard = () => {
 
           {/* Channel-wise Campaign Summary */}
           <div id="channel-summary" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-3">
-            {/* <div className="flex justify-between items-center mb-4">
-              <h3 className="font-medium">Channel Performance</h3>
-              <button className="text-xs text-indigo-600 font-medium">View Detailed Report</button>
-            </div> */}
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-medium">Channel Performance</h3>
               <button
@@ -702,25 +698,19 @@ const CampaignDashboard = () => {
           <div id="campaign-list" className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-3">
             <div className="md:flex justify-between items-center mb-4">
               <h3 className="font-medium">Campaign List</h3>
-              <div className="flex items-center space-x-3">
-                <div className="relative">
-                  <div className="border border-gray-300 rounded-md px-3 py-1.5 flex items-center bg-white text-sm">
+              <div className="md:flex items-center space-x-3">
+                  <div className="w-fit border border-gray-300 rounded-md px-3 py-1.5 flex items-center bg-white text-sm">
                     <FilterList className="mr-2 text-gray-500" style={{ fontSize: '1rem' }} />
                     <span className="text-gray-700">Filter</span>
                     <ExpandMore className="ml-2 text-gray-500" style={{ fontSize: '0.75rem' }} />
                   </div>
-                </div>
-                <div className="relative">
-                  <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
+                  <div className="w-fit flex mt-3 md:mt-0 items-center border border-gray-300 rounded-md overflow-hidden">
                     <input type="text" placeholder="Search campaigns..." className="text-sm px-3 py-1.5 focus:outline-none" />
-                    <button className="bg-gray-100 px-3 py-1.5 border-l border-gray-300">
                       <Search className="text-gray-500" style={{ fontSize: '1rem' }} />
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="overflow-x-auto w-[320px] sm:w-[380px] md:w-[412px] lg:w-auto">
+            <div className="overflow-x-auto w-[260px] sm:w-[380px] md:w-[412px] lg:w-auto">
               <table className="min-w-full bg-white text-sm text-left text-gray-700">
                 <thead>
                   <tr className="text-xs font-medium text-gray-500 uppercase bg-gray-50 tracking-wider">

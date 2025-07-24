@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Phone,
   PhoneDisabled,
@@ -30,8 +30,11 @@ import {
   CalendarToday,
   NotificationsNone
 } from '@mui/icons-material';
+import { ContentContext } from '../../context/ContextProvider';
 
 const Dialer = () => {
+  const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+
   const [status, setStatus] = useState('Available');
   const [showDialer, setShowDialer] = useState(false);
   const [showLiveCall, setShowLiveCall] = useState(false);
@@ -90,7 +93,7 @@ const Dialer = () => {
   };
 
   return (
-    <div className="bg-gray-50 mt-16 font-sans">
+    <div className="bg-gray-50 mt-16 font-sans pb-3">
       {/* Top notification bar */}
       <div id="notification-bar" className="bg-blue-50 p-3 flex items-center justify-between w-full">
         <div className="md:flex items-center">
@@ -113,7 +116,14 @@ const Dialer = () => {
               <div className="md:flex gap-2 mt-3 md:mt-0">
                 <button
                   onClick={toggleDialer}
-                  className="px-4 py-2 w-full md:w-36 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
+                  className="px-4 py-2 w-full md:w-36 text-white rounded-md flex items-center"
+                  style={{ backgroundColor: themeColor }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = themeColor;
+                  }}
                 >
                   <AddCall className="mr-2" />
                   Start Dialer

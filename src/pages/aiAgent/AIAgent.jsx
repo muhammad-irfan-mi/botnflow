@@ -326,7 +326,7 @@ const AIAgent = () => {
           {/* Left Panel: Intent Library */}
           <div className="flex-1 h-[1%] bg-white rounded-lg border border-gray-200 flex flex-col">
             <div className="p-4 border-b border-gray-200">
-              <div className="flex justify-between items-center mb-4">
+              <div className="md:flex justify-between items-center mb-4 space-y-1 md:space-y-0">
                 <h2 className="text-lg font-semibold text-gray-900">Intent Library</h2>
                 <div className="flex space-x-2">
                   <button onClick={bulkEdit} className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm hover:bg-gray-200">
@@ -402,7 +402,7 @@ const AIAgent = () => {
 
             {/* Tabs */}
             <div className="border-b border-gray-200">
-              <nav className="flex space-x-8 px-4">
+              <nav className="md:flex space-x-8 px-4">
                 {tabs.map(tab => (
                   <button
                     key={tab.id}
@@ -424,7 +424,7 @@ const AIAgent = () => {
               {/* Training Data Tab */}
               {activeTab === 'training' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div className="md:flex justify-between items-center">
                     <h3 className="text-lg font-medium text-gray-900">Training Utterances</h3>
                     <select
                       value={selectedLanguage}
@@ -439,7 +439,7 @@ const AIAgent = () => {
 
                   <div className="space-y-3">
                     {selectedIntent?.trainingData[selectedLanguage]?.map((utterance, index) => (
-                      <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                      <div key={index} className="flex items-center space-x-3 md:p-3 p-0 bg-gray-50 rounded-lg">
                         <input
                           type="text"
                           value={utterance.text}
@@ -456,7 +456,7 @@ const AIAgent = () => {
                             setSelectedIntent(updatedIntent);
                             updateIntentInList(updatedIntent);
                           }}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                          className="px-2 py-2 border border-gray-300 rounded-lg"
                         />
                         <button onClick={() => removeUtterance(index)} className="text-red-600 hover:text-red-800">
                           <FontAwesomeIcon icon={faTrash} />
@@ -473,14 +473,14 @@ const AIAgent = () => {
               {/* Entity Extraction Tab */}
               {activeTab === 'entities' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div className="md:flex justify-between items-center">
                     <h3 className="text-lg font-medium text-gray-900">Entity Configuration</h3>
-                    <button onClick={() => setShowAddEntity(true)} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                    <button onClick={() => setShowAddEntity(true)} className="mt-3 md:mt-0 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                       <FontAwesomeIcon icon={faPlus} className="mr-2" />Add Entity
                     </button>
                   </div>
 
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto w-[260px] md:w-full">
                     <table className="w-full border border-gray-200 rounded-lg">
                       <thead className="bg-gray-50">
                         <tr>
@@ -512,7 +512,7 @@ const AIAgent = () => {
               {/* Response Settings Tab */}
               {activeTab === 'responses' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div className="md:flex justify-between items-center">
                     <h3 className="text-lg font-medium text-gray-900">Response Configuration</h3>
                     <select
                       value={selectedLanguage}
@@ -555,7 +555,7 @@ const AIAgent = () => {
               {/* Actions Tab */}
               {activeTab === 'actions' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div className="md:flex justify-between items-center">
                     <h3 className="text-lg font-medium text-gray-900">Intent Actions</h3>
                     <button onClick={() => setShowAddAction(true)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
                       <FontAwesomeIcon icon={faPlus} className="mr-2" />Add Action
@@ -623,7 +623,6 @@ const AIAgent = () => {
       {/* Create Intent Modal */}
       {showCreateIntent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Dark overlay with opacity - separate from modal content */}
           <div
             className="fixed inset-0 bg-gray-100 opacity-70"
             onClick={() => setShowCreateIntent(false)}

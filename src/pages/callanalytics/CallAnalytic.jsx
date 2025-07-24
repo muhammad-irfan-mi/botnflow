@@ -70,7 +70,7 @@ const CallAnalytic = () => {
   };
 
   return (
-    <div className="flex h-screen mt-16 bg-gray-50">
+    <div className="flex h-screen mt-16 bg-gray-50 pb-3">
       <main className="flex-1 overflow-auto">
         <div className="p-3">
           {/* Overview Metrics */}

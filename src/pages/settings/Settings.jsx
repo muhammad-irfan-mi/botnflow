@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     AppBar,
     Toolbar,
@@ -56,8 +56,11 @@ import {
 } from '@mui/icons-material';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { ContentContext } from '../../context/ContextProvider';
 
 const Settings = () => {
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+
     const [darkMode, setDarkMode] = useState(false);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [anchorElLang, setAnchorElLang] = useState(null);
@@ -118,6 +121,19 @@ const Settings = () => {
         setDarkMode(!darkMode);
     };
 
+    const tabStyle = (tabName) => ({
+        color: dashboard === tabName ? themeColor : '',
+        borderBottom: dashboard === tabName ? `2px solid ${themeColor}` : '2px solid transparent'
+    });
+
+    const tabs = [
+        { id: 'general', label: 'General' },
+        { id: 'channels', label: 'Channels' },
+        { id: 'integrations', label: 'Integrations' },
+        { id: 'user-management', label: 'User Management' },
+        { id: 'billing', label: 'Billing' },
+    ];
+
     return (
         <div className={`flex flex-col min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
             {/* Main Content */}
@@ -132,7 +148,7 @@ const Settings = () => {
                     </div>
 
                     {/* Tabs Navigation */}
-                    <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
+                    {/* <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
                         <div className="md:flex overflow-x-auto hide-scrollbar">
                             <button
                                 onClick={() => setCurrentTab('general')}
@@ -164,6 +180,33 @@ const Settings = () => {
                             >
                                 Billing
                             </button>
+                        </div>
+                    </div> */}
+                    <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
+                        <div className="md:flex overflow-x-auto hide-scrollbar">
+                            {tabs.map((tab) => {
+                                const isActive = currentTab === tab.id;
+
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setCurrentTab(tab.id)}
+                                        className={`block md:py-3 md:px-4 p-1 border-b-2 font-medium text-sm whitespace-nowrap`}
+                                        style={{
+                                            borderColor: isActive ? themeColor : 'transparent',
+                                            color: isActive ? themeColor : 'gray',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (!isActive) e.currentTarget.style.color = secondaryThemeColor;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (!isActive) e.currentTarget.style.color = 'gray';
+                                        }}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -244,7 +287,15 @@ const Settings = () => {
                                 </div>
 
                                 <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-right">
-                                    <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                        style={{ backgroundColor: themeColor }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = themeColor;
+                                        }}
+                                    >
                                         Save Changes
                                     </button>
                                 </div>
@@ -281,7 +332,15 @@ const Settings = () => {
                                 </div>
 
                                 <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-right">
-                                    <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                        style={{ backgroundColor: themeColor }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = themeColor;
+                                        }}
+                                    >
                                         Save Changes
                                     </button>
                                 </div>
@@ -529,8 +588,15 @@ const Settings = () => {
                                 <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-right">
                                     <button
                                         type="button"
-                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
                                         onClick={handleSaveChanges}
+                                        style={{ backgroundColor: themeColor }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = themeColor;
+                                        }}
                                     >
                                         Save Changes
                                     </button>
@@ -549,7 +615,14 @@ const Settings = () => {
                                             <h2 className="text-lg font-medium text-gray-800 dark:text-white">Integrations</h2>
                                             <p className="text-gray-600 dark:text-gray-300">Connect your CPaaS portal to other services</p>
                                         </div>
-                                        <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                                            style={{ backgroundColor: themeColor }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.backgroundColor = themeColor;
+                                            }}>
                                             <AddIcon className="mr-2" />
                                             Add Integration
                                         </button>
@@ -622,7 +695,14 @@ const Settings = () => {
                                                     <h4 className="font-medium text-gray-800 dark:text-white">Slack</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Get notifications and send messages directly from Slack.</p>
-                                                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                <button className="text-sm font-medium"
+                                                    style={{ color: themeColor }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.color = secondaryThemeColor;
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.color = themeColor;
+                                                    }}>
                                                     Connect <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                 </button>
                                             </div>
@@ -636,7 +716,14 @@ const Settings = () => {
                                                     <h4 className="font-medium text-gray-800 dark:text-white">HubSpot</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Sync contacts and automate communications with HubSpot CRM.</p>
-                                                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                <button className="text-sm font-medium"
+                                                    style={{ color: themeColor }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.color = secondaryThemeColor;
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.color = themeColor;
+                                                    }}>
                                                     Connect <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                 </button>
                                             </div>
@@ -650,7 +737,14 @@ const Settings = () => {
                                                     <h4 className="font-medium text-gray-800 dark:text-white">Google Analytics</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Track message performance and campaign analytics.</p>
-                                                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                <button className="text-sm font-medium"
+                                                    style={{ color: themeColor }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.color = secondaryThemeColor;
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.color = themeColor;
+                                                    }}>
                                                     Connect <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                 </button>
                                             </div>
@@ -664,7 +758,14 @@ const Settings = () => {
                                                     <h4 className="font-medium text-gray-800 dark:text-white">Shopify</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Send order updates and promotional messages to customers.</p>
-                                                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                <button className="text-sm font-medium"
+                                                    style={{ color: themeColor }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.color = secondaryThemeColor;
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.color = themeColor;
+                                                    }}>
                                                     Connect <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                 </button>
                                             </div>
@@ -678,7 +779,14 @@ const Settings = () => {
                                                     <h4 className="font-medium text-gray-800 dark:text-white">Zendesk</h4>
                                                 </div>
                                                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Integrate messaging with your customer support workflow.</p>
-                                                <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                <button className="text-sm font-medium"
+                                                    style={{ color: themeColor }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.color = secondaryThemeColor;
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.color = themeColor;
+                                                    }}>
                                                     Connect <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                 </button>
                                             </div>
@@ -691,7 +799,14 @@ const Settings = () => {
                                                     </div>
                                                     <h4 className="font-medium text-gray-800 dark:text-white mb-2">More Integrations</h4>
                                                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Explore our marketplace for more integration options.</p>
-                                                    <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                                                    <button className="text-sm font-medium"
+                                                        style={{ color: themeColor }}
+                                                        onMouseEnter={(e) => {
+                                                            e.currentTarget.style.color = secondaryThemeColor;
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            e.currentTarget.style.color = themeColor;
+                                                        }}>
                                                         View All <ArrowForwardIcon className="ml-1" fontSize="small" />
                                                     </button>
                                                 </div>
@@ -713,7 +828,14 @@ const Settings = () => {
                                             <h2 className="text-lg font-medium text-gray-800 dark:text-white">User Management</h2>
                                             <p className="text-gray-600 dark:text-gray-300">Manage users and permissions</p>
                                         </div>
-                                        <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                            style={{ backgroundColor: themeColor }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.backgroundColor = themeColor;
+                                            }}>
                                             <AddIcon className="mr-2" />
                                             Add User
                                         </button>
@@ -794,7 +916,14 @@ const Settings = () => {
                                                         Just now
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3">Edit</button>
+                                                        <button className="dark:text-blue-400 dark:hover:text-blue-300 mr-3"
+                                                            style={{ color: themeColor }}
+                                                            onMouseEnter={(e) => {
+                                                                e.currentTarget.style.color = secondaryThemeColor;
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.currentTarget.style.color = themeColor;
+                                                            }}>Edit</button>
                                                         <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>
                                                     </td>
                                                 </tr>
@@ -825,7 +954,14 @@ const Settings = () => {
                                                         2 hours ago
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3">Edit</button>
+                                                        <button className="dark:text-blue-400 dark:hover:text-blue-300 mr-3"
+                                                            style={{ color: themeColor }}
+                                                            onMouseEnter={(e) => {
+                                                                e.currentTarget.style.color = secondaryThemeColor;
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.currentTarget.style.color = themeColor;
+                                                            }}>Edit</button>
                                                         <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>
                                                     </td>
                                                 </tr>
@@ -856,7 +992,14 @@ const Settings = () => {
                                                         1 day ago
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3">Edit</button>
+                                                        <button className="dark:text-blue-400 dark:hover:text-blue-300 mr-3"
+                                                            style={{ color: themeColor }}
+                                                            onMouseEnter={(e) => {
+                                                                e.currentTarget.style.color = secondaryThemeColor;
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.currentTarget.style.color = themeColor;
+                                                            }}>Edit</button>
                                                         <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>
                                                     </td>
                                                 </tr>
@@ -883,7 +1026,14 @@ const Settings = () => {
                                             <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full dark:bg-green-900 dark:text-green-200">
                                                 Pro Plan
                                             </span>
-                                            <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                            <button type="button" className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                                style={{ backgroundColor: themeColor }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = themeColor;
+                                                }}>
                                                 <CreditCardIcon className="mr-2" />
                                                 Add Credits
                                             </button>
@@ -1034,7 +1184,14 @@ const Settings = () => {
                                                 </li>
                                             </ul>
 
-                                            <button class="w-full mt-6 py-2 px-4 border border-transparent rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                            <button class="w-full mt-6 py-2 px-4 border border-transparent rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                                                style={{ backgroundColor: themeColor }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.backgroundColor = secondaryThemeColor;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.backgroundColor = themeColor;
+                                                }}>
                                                 Current Plan
                                             </button>
                                         </div>
@@ -1090,7 +1247,14 @@ const Settings = () => {
                                     <div class="p-6">
                                         <div class="flex justify-between items-center mb-4">
                                             <h3 class="text-lg font-medium text-gray-800">Payment Method</h3>
-                                            <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                                            <button class=" text-sm font-medium"
+                                                style={{ color: themeColor }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.color = secondaryThemeColor;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.color = themeColor;
+                                                }}>
                                                 Update
                                             </button>
                                         </div>
@@ -1121,7 +1285,14 @@ const Settings = () => {
                                     <div class="p-6">
                                         <div class="flex justify-between items-center mb-4">
                                             <h3 class="text-lg font-medium text-gray-800">Recent Invoices</h3>
-                                            <button class="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                                            <button class="text-sm font-medium"
+                                                style={{ color: themeColor }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.color = secondaryThemeColor;
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.color = themeColor;
+                                                }}>
                                                 View All
                                             </button>
                                         </div>
