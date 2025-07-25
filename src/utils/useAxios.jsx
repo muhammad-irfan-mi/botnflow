@@ -16,8 +16,7 @@ const useAxios = async (method, path, token = null, body = null) => {
             url: apiEndPoint,
             method,
             headers,
-            data: body,
-            withCredentials: true,
+            data: body
         });
 
         return [response.data, null];
