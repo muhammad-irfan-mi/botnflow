@@ -9,16 +9,21 @@ const useAxios = async (method, path, token = null, body = null) => {
 
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
+
+    }
+
+    const config = {
+        url: apiEndPoint,
+        method,
+        headers,
+    };
+
+    if (body !== null && method !== 'DELETE') {
+        config.data = body;
     }
 
     try {
-        const response = await axios({
-            url: apiEndPoint,
-            method,
-            headers,
-            data: body
-        });
-
+        const response = await axios(config);
         return [response.data, null];
 
     } catch (error) {

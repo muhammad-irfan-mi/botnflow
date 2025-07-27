@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import AppRoute from './routes/AppRoute';
 import Header from './component/global/Header';
@@ -8,14 +8,23 @@ import Footer from './component/global/Footer';
 import { ReactFlowProvider } from '@xyflow/react';
 import CustomizationModal from './component/modal/CustomizationModal';
 import { ContentContext } from './context/ContextProvider';
+import { toast, ToastContainer } from 'react-toastify';
+import isTokenValid from './utils/ValidateToken';
+import getToken from './utils/GetToken';
+import useAxios from './utils/useAxios';
 
 
 function AppContent() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const token = getToken()
   const [showSidebar, setShowSidebar] = useState(true);
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
   const [screenSize, setScreenSize] = useState('desktop');
-  const { customizationModal, setCustomizationModal } = useContext(ContentContext)
+  const { setUserInfo, customizationModal, setCustomizationModal } = useContext(ContentContext)
+
+  // const token = localStorage.getItem('token')
+  const validToken = isTokenValid(token);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,7 +46,6 @@ function AppContent() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Disable body scroll when sidebar is open on mobile/small laptop
   useEffect(() => {
     if ((screenSize === 'mobile' || screenSize === 'small-laptop') && showSidebar) {
       document.body.style.overflow = 'hidden';
@@ -50,11 +58,40 @@ function AppContent() {
     };
   }, [showSidebar, screenSize]);
 
-  const isAuthPage = ['/', '/login', '/signup', '/forgot-password', '/verify-opt', '/flow'].includes(location.pathname);
+  useEffect(() => {
+    if (token && !validToken) {
+      toast.info('Session expired, please login again');
+      localStorage.removeItem('token');
+      navigate('/');
+    }
+    else if (token) {
+      navigate('/dashboard');
+    }
+    else {
+      if (!token && !['/login', '/signup', '/forgot-password', '/verify-otp', '/email-verification'].includes(location.pathname)) {
+        navigate('/');
+      }
+    }
+  }, [token]);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const [responseData, fetchError] = await useAxios('GET', 'users', token);
+        if (responseData) {
+          setUserInfo(responseData.data.user)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getUserInfo();
+  }, [token])
+
+  const isAuthPage = ['/', '/login', '/signup', '/email-verification', '/forgot-password', '/verify-otp', '/flow'].includes(location.pathname);
 
   return (
     <>
-      {/* Full screen overlay that covers everything including header */}
       {(screenSize === 'mobile' || screenSize === 'small-laptop') && showSidebar && (
         <div
           className="fixed inset-0 z-30 bg-gray-200 opacity-50"
@@ -78,11 +115,6 @@ function AppContent() {
                 : `transition-all duration-300 ease-in-out ${showSidebar || isSidebarHovered ? 'w-64' : 'w-14'} fixed h-[90vh] top-16`} flex-shrink-0 bg-primary-600 shadow-xl`}
             >
 
-              {/* <Sidebar
-                onClose={() => (screenSize === 'mobile' || screenSize === 'small-laptop') && setShowSidebar(false)}
-                isCompact={screenSize === 'small-laptop'}
-                showSidebar={showSidebar}
-              /> */}
               <Sidebar
                 onClose={() => (screenSize === 'mobile' || screenSize === 'small-laptop') && setShowSidebar(false)}
                 isCompact={screenSize === 'small-laptop'}
@@ -105,6 +137,7 @@ function AppContent() {
         </div>
 
         {customizationModal && <CustomizationModal />}
+        <ToastContainer position="bottom-right" />
       </div>
     </>
   );

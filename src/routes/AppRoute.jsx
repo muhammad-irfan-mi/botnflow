@@ -22,6 +22,7 @@ import BroadCast from '../pages/broadcast/BroadCast';
 import AiAgentList from '../pages/aiAgent/AiAgentList';
 import APICredential from '../pages/apiCredential/APICredential';
 import LeadGeneration from '../pages/leadgeneration/LeadGeneration';
+import EmailVerification from '../component/auth/EmailVerification ';
 
 
 function AppRoute() {
@@ -31,7 +32,8 @@ function AppRoute() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/verify-opt" element={<OtpVerification />} />
+        <Route path="/email-verification" element={<EmailVerification />} />
+        <Route path="/verify-otp" element={<OtpVerification />} />
 
 
         <Route path="/dashboard" element={<DashboardList />} />

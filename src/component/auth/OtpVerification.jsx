@@ -1,11 +1,65 @@
 import VisualPanel from './VisualPanel';
 import logo from '../../assets/images/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const OtpVerification = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('OTP Submitted');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const { search } = useLocation();
+  const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(search);
+  const token = decodeURIComponent(queryParams.get('token') || '');
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+
+  const handlePasswordReset = async () => {
+    if (!token) {
+      toast.error('Invalid or missing token');
+      return;
+    }
+
+    if (!password || !confirmPassword) {
+      toast.error('Please fill both password fields');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/reset-password/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token, password }),
+      });
+
+      const responseData = await res.json();
+
+      if (res.ok) {
+        toast.success(responseData.message || 'Password reset successfully');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        toast.error(responseData.error || 'Reset failed');
+      }
+    } catch (error) {
+      toast.error(err.message || 'Something went wrong');
+    }
   };
 
   return (
@@ -18,41 +72,61 @@ const OtpVerification = () => {
             <img src={logo} alt="logo" className='w-60' />
           </div>
 
-          <div className="text-center">
-            <p className="mt-2 text-sm text-gray-600">Enter Verification Code</p>
-          </div>
 
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-1">
-                Authenticator OTP
+          <div className="space-y-5" >
+            <div className="relative">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                New Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <i className="fa-solid fa-key text-gray-400"></i>
-                </div>
-                <input
-                  id="otp"
-                  name="otp"
-                  type="text"
-                  required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-gray-900"
-                  placeholder="******"
-                />
-              </div>
-            </div>
-
-            <div>
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="w-full pl-3 pr-10 py-3 border rounded-lg"
+                placeholder="••••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <button
-                type="submit"
-                className="w-full bg-primary-600 flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition duration-150"
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-3 top-9 text-gray-600"
               >
-                Send OTP
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </button>
             </div>
-          </form>
 
-          <div className="mt-[41px] text-center"></div>
+            <div className="relative">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                className="w-full pl-3 pr-10 py-3 border rounded-lg"
+                placeholder="••••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={toggleConfirmPasswordVisibility}
+                className="absolute right-3 top-9 text-gray-600"
+              >
+                {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </button>
+            </div>
+
+            <button
+              onClick={handlePasswordReset}
+              className="w-full bg-primary-600 py-3 rounded-lg text-white font-medium hover:bg-primary-700 transition"
+            >
+              Reset Password
+            </button>
+          </div>
+
+          {/* <div className="mt-[41px] text-center"></div> */}
         </div>
 
         <div className="mt-8 text-center text-xs text-gray-500">

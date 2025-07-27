@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { FaEnvelope, FaLock, FaEye, FaGoogle, FaFacebook, FaShieldHalved } from 'react-icons/fa6';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import VisualPanel from './VisualPanel';
 import { toast } from 'react-toastify';
 import useAxios from '../../utils/useAxios';
+import { auth, facebookProvider, googleProvider } from "../../utils/firebase";
+import { signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,28 +22,34 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // const validateForm = () => {
-    //     if (!formData.email || !formData.password) {
-    //         toast.error('Email and password are required.', { autoClose: 2000 });
-    //         alert('Email and password are required.');
-    //         return false;
-    //     }
-    //     return true;
-    // };
+    const validateForm = () => {
+        if (!formData.email && !formData.password) {
+            toast.error('Email and password are required.', { autoClose: 2000 });
+            return false;
+        }
+        if (!formData.email) {
+            toast.error('Email are required.', { autoClose: 2000 });
+            return false;
+        }
+        if (!formData.password) {
+            toast.error('password are required.', { autoClose: 2000 });
+            return false;
+        }
+        return true;
+    };
 
     const handleLogin = async () => {
-        console.log("object")
-        // if (!validateForm()) return;
+        if (!validateForm()) return;
 
         try {
             setLoading(true);
             const [responseData, fetchError] = await useAxios('POST', 'auth/login', null, formData);
             if (responseData) {
+                console.log("object", responseData)
                 toast.success('Login successful!', { autoClose: 2000 });
                 setTimeout(() => {
-                    localStorage.setItem('token', responseData.token);
+                    localStorage.setItem('token', responseData.data.token);
                     navigate('/dashboard/');
-                    // window.location.reload();
                 }, 2000);
             } else {
                 toast.error(fetchError?.message || 'Login failed', { autoClose: 2000 });
@@ -48,6 +58,56 @@ const Login = () => {
             toast.error(err.message || 'Something went wrong', { autoClose: 2000 });
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        try {
+            setLoading(true);
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+
+            if (user) {
+                const structuredData = {
+                    loginVia: "google",
+                    profileData: {
+                        email: user.email || '',
+                        firstName: user.displayName || '',
+                        phoneNumber: user.phoneNumber || '',
+                        profilePicture: user.photoURL || '',
+                        verified: user.emailVerified || false
+                    }
+                };
+
+                console.log(structuredData);
+                const [responseData, error] = await useAxios('POST', 'auth/firebase-auth', null, structuredData);
+                if (responseData) {
+                    toast.success('Login successfully!');
+                    setTimeout(() => {
+                        console.log(responseData);
+                        localStorage.setItem('token', JSON.stringify(responseData.data.token));
+                        navigate('/dashboard');
+                        // window.location.reload();
+                    }, 2000);
+                }
+            } else {
+                toast.error('Registration error');
+            }
+        } catch (error) {
+            toast.error(error.message || 'Login failed');
+        } finally {
+            setLoading(false);
+        }
+
+    };
+
+    const handleFacebookLogin = async () => {
+        try {
+            const result = await signInWithPopup(auth, facebookProvider);
+            const user = result.user;
+            console.log("User info facebook:", user);
+        } catch (error) {
+            console.error("Facebook login error", error);
         }
     };
 
@@ -90,8 +150,8 @@ const Login = () => {
                                     value={formData.password}
                                     onChange={handleChange}
                                 />
-                                <button type="button" onClick={togglePasswordVisibility} className="absolute right-3 top-3 text-gray-400">
-                                    <FaEye />
+                                <button type="button" onClick={togglePasswordVisibility} className="absolute right-3 top-3 text-gray-600">
+                                    {!showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                 </button>
                             </div>
                         </div>
@@ -120,11 +180,15 @@ const Login = () => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
-                        <button className="flex items-center justify-center py-2.5 px-4 border rounded-lg bg-white hover:bg-gray-50">
+                        <button className="flex items-center justify-center py-2.5 px-4 border rounded-lg bg-white hover:bg-gray-50"
+                         onClick={handleGoogleLogin}
+                         >
                             <FaGoogle className="text-red-500 mr-2" />
                             Google
                         </button>
-                        <button className="flex items-center justify-center py-2.5 px-4 border rounded-lg bg-white hover:bg-gray-50">
+                        <button className="flex items-center justify-center py-2.5 px-4 border rounded-lg bg-white hover:bg-gray-50" 
+                        onClick={handleFacebookLogin}
+                        >
                             <FaFacebook className="text-blue-600 mr-2" />
                             Facebook
                         </button>

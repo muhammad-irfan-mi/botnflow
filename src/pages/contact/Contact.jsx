@@ -1,29 +1,109 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
-    Add,
-    Search,
-    Group,
-    PersonAdd,
-    Person,
-    EmojiEvents,
-    Business,
-    WhatsApp,
-    Phone,
-    Visibility,
-    Edit,
-    Delete,
-    Upload,
-    Download,
+    Add, Search, Group, PersonAdd, Person, EmojiEvents, Business, WhatsApp, Phone,
+    Visibility, Edit, Delete, Upload, Download
 } from "@mui/icons-material";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { ContentContext } from "../../context/ContextProvider";
+import useAxios from "../../utils/useAxios";
+import CreateContact from "../../component/modal/CreateContact";
+import DeleteModal from "../../component/modal/DeleteModal";
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import getToken from "../../utils/GetToken";
+import { exportToCSV } from "../../utils/exportToCSV";
+import Loader from "../../component/Loader";
+
+const ITEMS_PER_PAGE = 5;
 
 const Contacts = () => {
-    const { themeColor, secondaryThemeColor } = useContext(ContentContext)
+    const token = getToken()
+    const { themeColor, secondaryThemeColor } = useContext(ContentContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedContactId, setSelectedContactId] = useState(null);
+    const [loading, setLoading] = useState(false)
+    const [onLoad, setOnLoad] = useState(false)
+
+    const [data, setData] = useState([
+        {
+            id: 1,
+            name: `John Smith`,
+            phone: `+1 (555) 123-45`,
+            email: `john@example.com`,
+            channels: ["chat", "whatsapp", "phone"],
+            tags: ["Customer", "Inactive"],
+            lastContact: `hours ago`,
+            avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+        },
+        {
+            id: 2,
+            name: `John Smith`,
+            phone: `+1 (555) 123-45`,
+            email: `john@example.com`,
+            channels: ["chat", "whatsapp", "phone"],
+            tags: ["Customer", "Inactive"],
+            lastContact: `hours ago`,
+            avatar: "https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+        }
+    ])
+
+    useEffect(() => {
+        setLoading(true)
+        const getContact = async () => {
+            const [responseData, fetchError] = await useAxios('GET', 'contacts', token, null);
+            if (responseData) {
+                setData(responseData.data.contacts)
+                setLoading(false)
+            }
+            else {
+                console.log(fetchError)
+                setLoading(false)
+            }
+        }
+        getContact();
+    }, [])
 
     const toggleModal = () => setIsModalOpen(!isModalOpen);
 
+    const paginatedData = data.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
+    const handleDelete = async () => {
+        try {
+            const [responseData, fetchError] = await useAxios('DELETE', `contacts/${selectedContactId}`, token);
+            if (responseData) {
+                toast.success("Contact Delete Successfully", { autoClose: 2000 })
+                setShowDeleteModal(false)
+            }
+            else {
+                console.log(fetchError)
+                toast.error("Failed to delete contact", { autoClose: 2000 });
+            }
+        } catch (error) {
+            toast.error("Failed to delete contact", { autoClose: 2000 })
+        }
+    };
+
+    const handleExport = () => {
+        const headers = ["Name", "Email", "Phone"];
+        const dataRows = data.map((user) => [
+            `${user.firstName} ${user.lastName}`,
+            user.email,
+            user.phoneNumber,
+        ]);
+
+        exportToCSV("users.csv", headers, dataRows);
+    };
+
+    const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+
+    if (loading) {
+        return <Loader />
+    }
     return (
         <div className="min-h-screen mt-16 bg-gray-50  font-sans">
             <div className="mb-6 p-3">
@@ -36,7 +116,7 @@ const Contacts = () => {
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                         <div className="p-4 border-b border-gray-200">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold text-gray-900">Groups</h2>
+                                <h2 className="text-lg font-semibold text-gray-900">Tags</h2>
                                 <button
                                     className="px-3 py-2 text-white text-sm rounded-lg flex items-center gap-1"
                                     style={{ backgroundColor: themeColor }}
@@ -99,7 +179,6 @@ const Contacts = () => {
                         </div>
                     </div>
                 </div>
-
                 {/* Contact Table */}
                 <div className="md:flex-3 flex-2 mt-3 md:mt-0">
                     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
@@ -122,11 +201,11 @@ const Contacts = () => {
                             </div>
                             <div className="md:flex items-center space-x-2">
                                 <div className="flex gap-2">
-                                    <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
-                                        <Download fontSize="small" /> Export
+                                    <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1" onClick={handleExport}>
+                                        <Upload fontSize="small" /> Export
                                     </button>
                                     <button className="px-3 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-1">
-                                        <Upload fontSize="small" /> Import
+                                        <Download fontSize="small" /> Import
                                     </button>
                                 </div>
                                 <button
@@ -146,122 +225,136 @@ const Contacts = () => {
                         </div>
 
                         {/* Table */}
-                        <div className="overflow-x-auto w-[285px] md:w-[740px] lg:w-auto">
+                        <div className="overflow-x-auto w-[285px] md:w-[740px]">
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            <input type="checkbox" className="rounded" />
-                                        </th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Channels</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tags</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Contact</th>
-                                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                        <th className="px-4 py-3"><input type="checkbox" /></th>
+                                        <th className="px-4 py-3">Avatar</th>
+                                        <th className="px-4 py-3">Name</th>
+                                        <th className="px-4 py-3">Phone</th>
+                                        <th className="px-4 py-3">Email</th>
+                                        <th className="px-4 py-3">Channels</th>
+                                        <th className="px-4 py-3">Tags</th>
+                                        <th className="px-4 py-3">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    <tr className="hover:bg-gray-50">
-                                        <td className="px-4 py-4"><input type="checkbox" className="rounded" /></td>
-                                        <td className="px-4 py-4">
-                                            <div className="flex items-center">
+                                    {paginatedData.map((contact) => (
+                                        <tr key={contact.id} className="hover:bg-gray-50">
+                                            <td className="px-4 py-4"><input type="checkbox" /></td>
+                                            <td className="px-4 py-4">
                                                 <img
-                                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                                                    src={contact.avatar}
                                                     alt="Avatar"
                                                     className="w-8 h-8 rounded-full mr-3"
                                                 />
-                                                <span className="font-medium text-gray-900">John Smith</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-4 py-4 text-gray-900">+1 (555) 123-4567</td>
-                                        <td className="px-4 py-4 text-gray-600">john@example.com</td>
-                                        <td className="px-4 py-4">
-                                            <div className="flex space-x-2">
-                                                <ChatBubbleIcon fontSize="small" className="text-blue-500" />
-                                                <WhatsApp fontSize="small" className="text-green-500" />
-                                                <Phone fontSize="small" className="text-gray-400" />
-                                            </div>
-                                        </td>
-                                        <td className="px-4 py-4">
-                                            <span className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-1">Customer</span>
-                                            <span className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
-                                        </td>
-                                        <td className="px-4 py-4 text-gray-600">2 hours ago</td>
-                                        <td className="px-4 py-4">
-                                            <div className="flex space-x-2">
-                                                <Visibility className="text-blue-600 hover:text-blue-800 cursor-pointer" />
-                                                <Edit className="text-green-600 hover:text-green-800 cursor-pointer" />
-                                                <Delete className="text-red-600 hover:text-red-800 cursor-pointer" />
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td className="px-4 py-4 text-gray-900">
+                                                {contact.firstName ? contact.firstName.slice(0, 7) : "--"}
+                                            </td>
+                                            <td className="px-4 py-4 text-gray-900">
+                                                {contact.phoneNumber ? contact.phoneNumber.slice(0, 17) : "--"}</td>
+                                            <td className="px-4 py-4 text-gray-600">
+                                                {contact.email ? contact.email.slice(0, 15) : "--"}
+                                            </td>
+                                            <td
+                                                className={`px-4 py-4 ${contact.channel === 'twilio'
+                                                    ? 'text-blue-500'
+                                                    : contact.channel === 'whatsapp'
+                                                        ? 'text-green-500'
+                                                        : contact.channel === 'webchat'
+                                                            ? 'text-yellow-500'
+                                                            : 'text-gray-600'
+                                                    }`}
+                                            >
+                                                {contact.channel}
+                                            </td>
+                                            <td className="px-4 py-4">
+                                                {Array.isArray(contact.tags) &&
+                                                    contact.tags.filter(tag => typeof tag === 'string' && tag.trim() !== '').length > 0 ? (
+                                                    <div className="flex flex-wrap gap-1">
+                                                        {contact.tags
+                                                            .filter(tag => typeof tag === 'string' && tag.trim() !== '')
+                                                            .map((tag, idx) => (
+                                                                <span
+                                                                    key={idx}
+                                                                    className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${tag === 'Active'
+                                                                        ? 'bg-green-100 text-green-800'
+                                                                        : 'bg-blue-100 text-blue-800'
+                                                                        }`}
+                                                                >
+                                                                    {tag}
+                                                                </span>
+                                                            ))}
+                                                    </div>
+                                                ) : (
+                                                    <span className="text-gray-500">--</span>
+                                                )}
+                                            </td>
+                                            <td className="px-4 py-4">
+                                                <div className="flex space-x-2">
+                                                    <Visibility className="text-blue-600 hover:text-blue-800 cursor-pointer" />
+                                                    <Edit className="text-green-600 hover:text-green-800 cursor-pointer" />
+                                                    <Delete
+                                                        className="text-red-600 hover:text-red-800 cursor-pointer"
+                                                        onClick={() => {
+                                                            setSelectedContactId(contact._id);
+                                                            setShowDeleteModal(true);
+                                                        }} />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
 
-                        <div className="md:px-4 py-3 border-t border-gray-200 md:flex items-center justify-between ">
+                        {/* Pagination */}
+                        <div className="md:px-4 py-3 border-t border-gray-200 md:flex items-center justify-between">
                             <div className="text-sm text-gray-700">
-                                Showing 1 to 20 of 1,247 contacts
+                                Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, data.length)} of {data.length} contacts
                             </div>
                             <div className="flex space-x-2 mt-2 md:mt-0">
-                                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
-                                <button style={{backgroundColor: themeColor}} className="px-3 py-1 text-white rounded text-sm">1</button>
-                                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
-                                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">3</button>
-                                <button className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+                                <button
+                                    disabled={currentPage === 1}
+                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                    className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50"
+                                >
+                                    Previous
+                                </button>
+                                {[...Array(totalPages)].map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setCurrentPage(i + 1)}
+                                        className={`px-3 py-1 border rounded text-sm ${currentPage === i + 1
+                                            ? "text-white"
+                                            : "text-gray-700 border-gray-300 hover:bg-gray-50"}`}
+                                        style={currentPage === i + 1 ? { backgroundColor: themeColor } : {}}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))}
+                                <button
+                                    disabled={currentPage === totalPages}
+                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                    className="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50 disabled:opacity-50"
+                                >
+                                    Next
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {/* Add Contact Modal */}
+            {/* Modal remains unchanged */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
-                    <div
-                        className="fixed inset-0 bg-black opacity-70"
-                        onClick={toggleModal}
-                    ></div>
-
-                    <div
-                        className="bg-white rounded-lg max-w-md w-full p-6 relative z-50 mx-4"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex justify-between items-center border-b pb-3 mb-4">
-                            <h3 className="text-lg font-semibold text-gray-900">Add New Contact</h3>
-                            <button
-                                onClick={toggleModal}
-                                className="text-gray-400 hover:text-gray-600"
-                            >
-                                <i className="fa-solid fa-times"></i>
-                            </button>
-                        </div>
-                        <form className="space-y-4">
-                            {["First Name", "Last Name", "Phone", "Email"].map((label, i) => (
-                                <div key={i}>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-                                    <input
-                                        type="text"
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                </div>
-                            ))}
-                            <div className="flex justify-end">
-                                <button
-                                    type="button"
-                                    onClick={toggleModal}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                >
-                                    Save Contact
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <CreateContact toggleModal={toggleModal} />
             )}
-        </div>
+            {showDeleteModal && (
+                <DeleteModal onClose={() => setShowDeleteModal(false)} onDelete={handleDelete} />
+            )}
+        </div >
     );
 };
 

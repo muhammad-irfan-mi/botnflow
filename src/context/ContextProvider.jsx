@@ -11,9 +11,8 @@ export const ContextProvider = ({ children }) => {
   const [logoImage, setLogoImage] = useState(logo)
   const [themeColor, setThemeColor] = useState('#0076cb');
   const [secondaryThemeColor, setSecondaryThemeColor] = useState('#1e3a8a');
-  console.log('themeColor', themeColor)
-  console.log('secondaryThemeColor', secondaryThemeColor)
   const [customizationModal, setCustomizationModal] = useState(false);
+  const [userInfo, setUserInfo] = useState([])
 
   const saveContentToServer = useCallback(async (nodeId, content) => {
     if (!currentFlowId) return;
@@ -73,7 +72,9 @@ export const ContextProvider = ({ children }) => {
       secondaryThemeColor,
       setSecondaryThemeColor,
       customizationModal,
-      setCustomizationModal
+      setCustomizationModal,
+      userInfo,
+      setUserInfo
     }}>
       {children}
     </ContentContext.Provider>
